@@ -1,10 +1,25 @@
 <!DOCTYPE html>
-<html lang="es">
-    <head>
-        <title>Probando</title>
-        <meta charset="utf-8">
-    </head>
-    <body>
-        hola
-    </body>
+<html lang="es" xmlns="">
+<head>
+    <title>Probando</title>
+    <meta charset="utf-8">
+</head>
+<body>
+hola
+</body>
+<script type="text/javascript">
+        async function getCapitulos(){
+            const capitulo = await fetch('cap/1', {
+                method: 'POST',
+                headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+                }
+            });
+            const capitulos = await capitulo.json();
+
+            console.log(capitulos);
+        }
+    </script>
+
 </html>
