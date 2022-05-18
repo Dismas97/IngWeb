@@ -5,11 +5,11 @@
     <meta charset="utf-8">
 </head>
 <body>
-hola
+    <button type="button" onclick="getCapitulos()">JSONCapitulos</button>
 </body>
 <script type="text/javascript">
         async function getCapitulos(){
-            const capitulo = await fetch('cap/1', {
+            const capitulo = await fetch('capitulos', {
                 method: 'POST',
                 headers: {
                 'Accept': 'application/json',
@@ -18,7 +18,7 @@ hola
             });
             const capitulos = await capitulo.json();
 
-            console.log(capitulos);
+            document.write(JSON.stringify(capitulos));
         }
     </script>
 

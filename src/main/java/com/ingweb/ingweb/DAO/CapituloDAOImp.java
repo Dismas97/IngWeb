@@ -4,15 +4,18 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository
 @Transactional
 public class CapituloDAOImp implements CapituloDAO{
-    private EntityManager conexion;
+
+    @PersistenceContext
+    EntityManager conexion;
     @Override
     public List<Capitulo> getCapitulos() {
-        String query = "FROM capitulo";
+        String query = "FROM Capitulo";
         return conexion.createQuery(query).getResultList();
     }
 }
