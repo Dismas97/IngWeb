@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-05-2022 a las 20:39:20
+-- Tiempo de generación: 20-05-2022 a las 18:19:16
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 7.4.29
 
@@ -29,6 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `capitulo` (
   `id` int(11) NOT NULL,
+  `num` int(11) NOT NULL DEFAULT 0,
   `mangaid` int(11) NOT NULL,
   `usuarioid` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -37,10 +38,10 @@ CREATE TABLE `capitulo` (
 -- Volcado de datos para la tabla `capitulo`
 --
 
-INSERT INTO `capitulo` (`id`, `mangaid`, `usuarioid`) VALUES
-(1, 1, 30),
-(2, 3, 0),
-(3, 1, 2);
+INSERT INTO `capitulo` (`id`, `num`, `mangaid`, `usuarioid`) VALUES
+(1, 5, 1, 30),
+(2, 4, 3, 0),
+(3, 5, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -78,7 +79,9 @@ CREATE TABLE `pagina` (
 --
 
 INSERT INTO `pagina` (`img`, `cap`) VALUES
-('Imagenes/1.jpg', 2);
+('Imagenes/01.jpg', 1),
+('Imagenes/1.jpg', 2),
+('Imagenes/2.jpg', 2);
 
 --
 -- Índices para tablas volcadas
