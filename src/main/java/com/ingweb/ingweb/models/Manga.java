@@ -14,6 +14,11 @@ public class Manga {
     private String nombre;
     @Getter @Setter
     private String descripcion;
+    @Getter @Setter
+    private String port;
     @Getter @Setter @OneToMany(mappedBy="manga")
     private List<Capitulo> caps;
+    public void ordenarCaps(){
+        caps.sort(null);
+    }
 }

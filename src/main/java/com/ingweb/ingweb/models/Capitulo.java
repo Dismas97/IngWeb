@@ -2,16 +2,16 @@ package com.ingweb.ingweb.models;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.jetbrains.annotations.NotNull;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Table(name="capitulo")
-public class Capitulo {
+public class Capitulo implements Comparable<Capitulo> {
     @Getter @Setter @Column(name = "id") @Id
     private long id;
-
     @Getter @Setter @Column(name = "num")
     private int num;
     @ManyToOne @JoinColumn(name="mangaid")
@@ -24,4 +24,8 @@ public class Capitulo {
     )
     @Column(name="img")
     private List<String> pag;
+    @Override
+    public int compareTo(@NotNull Capitulo c){
+        return this.num - c.num;
+    }
 }

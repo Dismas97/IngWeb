@@ -9,13 +9,19 @@
 </body>
 <script type="text/javascript">
         async function getCapitulos(){
-            const capitulo = await fetch('capitulos', {
+                                        // aca va la url que se conecta a la bd
+                                        // en los controller estan las url hechas
+                                        // manga/{mangaid}/{capid} devuelve el capitulo correspondiente al id del manga y capid
+                                        // manga/{mangaid}/capitulos devuelve TODOS los capitulos de un manga dado
+                                        // manga/{id} devuelve toda la info del manga
+            const capitulo = await fetch('manga/1/capitulos', {
                 method: 'POST',
                 headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
                 }
             });
+            //Aca devuelve en formato json lo consultado (Manga, capitulo, capitulos de un manga, etc)
             const capitulos = await capitulo.json();
 
             document.write(JSON.stringify(capitulos));

@@ -13,8 +13,12 @@ public class CapituloController {
     @Autowired
     private CapituloDAO dao = new CapituloDAOImp();
 
-    @RequestMapping(value = "capitulos")
-    public List<Capitulo> getCapitulos() {
-        return dao.getCapitulos();
+    @RequestMapping(value = "manga/{id}/{capid}")
+    public Capitulo getCapitulo(@PathVariable("id") Long mangaid, @PathVariable("capid") Long capid){
+        return dao.getCapitulo(mangaid,capid);
     }
+    @RequestMapping(value = "manga/{id}/capitulos")
+    public List<Capitulo> getCapitulos(@PathVariable Long id){ return dao.getCapitulos(id);}
+
+
 }

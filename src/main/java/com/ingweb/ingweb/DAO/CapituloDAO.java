@@ -9,5 +9,6 @@ import java.util.List;
 @Repository
 @Transactional
 public interface CapituloDAO {
-    List<Capitulo> getCapitulos();
+    Capitulo getCapitulo(long mangaid, long capid);
+    List<Capitulo> getCapitulos(long mangaid);
 }

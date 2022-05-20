@@ -14,8 +14,14 @@ public class CapituloDAOImp implements CapituloDAO{
     @PersistenceContext
     EntityManager conexion;
     @Override
-    public List<Capitulo> getCapitulos() {
-        String query = "FROM Capitulo";
+    public Capitulo getCapitulo(long mangaid, long id) {
+        String query = "FROM Capitulo C WHERE C.id = "+id+" AND C.manga.id = "+mangaid;
+        return (Capitulo) conexion.createQuery(query).getSingleResult();
+    }
+
+    @Override
+    public List<Capitulo> getCapitulos(long mangaid) {
+        String query = "From Capitulo C WHERE C.manga.id = "+mangaid+" ORDER BY C.num";
         return conexion.createQuery(query).getResultList();
     }
 }
