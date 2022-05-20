@@ -11,6 +11,9 @@ import java.util.List;
 public class Capitulo {
     @Getter @Setter @Column(name = "id") @Id
     private long id;
+
+    @Getter @Setter @Column(name = "num")
+    private int num;
     @ManyToOne @JoinColumn(name="mangaid")
     Manga manga;
     @Getter @Setter
