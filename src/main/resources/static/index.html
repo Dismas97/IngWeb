@@ -1,31 +1,96 @@
 <!DOCTYPE html>
-<html lang="es" xmlns="">
-<head>
-    <title>Probando</title>
-    <meta charset="utf-8">
-</head>
-<body>
-    <button type="button" onclick="getCapitulos()">JSONCapitulos</button>
-</body>
-<script type="text/javascript">
-        async function getCapitulos(){
-                                        // aca va la url que se conecta a la bd
-                                        // en los controller estan las url hechas
-                                        // manga/{mangaid}/{capid} devuelve el capitulo correspondiente al id del manga y capid
-                                        // manga/{mangaid}/capitulos devuelve TODOS los capitulos de un manga dado
-                                        // manga/{id} devuelve toda la info del manga
-            const capitulo = await fetch('manga/1/capitulos', {
-                method: 'POST',
-                headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="css/newcss.css" rel="stylesheet" type="text/css"/>
+        <script>
+            function collapseChapter(itemID) {
+                if(document.getElementById(itemID).style.display=="none"){
+                    document.getElementById(itemID).style.display = "block";
+                }else{
+                    document.getElementById(itemID).style.display = "none";
                 }
-            });
-            //Aca devuelve en formato json lo consultado (Manga, capitulo, capitulos de un manga, etc)
-            const capitulos = await capitulo.json();
+            }
+        </script>
+    </head>
+    <body>
+        <div class="pb-5">
+        <header>
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container">
+                    <a>
+                    TU<b>MANGA</b><i>ONLINE</i>
+                    </a>               
+                </div>
+            </nav>
+        </header>
+        <section class="element">
+            <header class="container-fluid element-header manga">
+                <div class="background"></div>
+                <div class="wallpaper"></div>
+                <section class="element-header-content" id="mangaHeader">
 
-            document.write(JSON.stringify(capitulos));
-        }
-    </script>
+                </section>
+            </header>
+        </section>
+        
+        <div class="container p-0 p-sm-2">
+            <div class="row">
+                <div class="col-12 col-lg-8">
+                    <div class="row">
+                        <div class="col-12">
+                            <h2>Capítulos</h2>
+                            <div class="card chapters" id="chapters">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item p-0 bg-light upload-link" data-index="0">
+                                        <h4 class="px-2 py-3 m-0">
+                                            <div class="row">
+                                                <div class="col-10 text-truncate">
+                                                    <a style="display: block;" class="btn-collapse" onclick="collapseChapter('collapsible782467')" role="button"><i class="fa fa-chevron-down fa-fw"></i> Capítulo 5.00
+                                                    </a>
+                                                 </div>
+                                            </div>
+                                        </h4>
+                                        <div style="display: none;" id="collapsible782467">
+                                            <hr class="mx-0 my-1">
+                                            <div class="card chapter-list-element">
+                                                <ul class="list-group list-group-flush chapter-list">
+                                                     <li class="list-group-item">
+                                                        <div class="row">
+                                                            <div class="col-4 col-md-6 text-truncate">
+                                                                <span class="">
+                                                                     <a href="https://lectortmo.com/groups/87756/kayros-translations">Kayros translations</a>
+                                                                </span>
+                                                            </div>
+                                                            <div class="col-2 col-sm-1 text-right">
+                                                                <a href="https://lectortmo.com/view_uploads/1005441" class="btn btn-default btn-sm">
+                                                                    <span class="fas fa-play fa-2x" style="color:#2957ba"></span>
+                                                                 </a>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        </li>
+
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+            </div>
+        </div>   
+        
+        
+        </div>
+        <script src = "JS/HeaderMangaInicializar.js"></script>
+    </body>
 
 </html>
