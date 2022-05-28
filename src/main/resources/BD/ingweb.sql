@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 20-05-2022 a las 18:19:16
+-- Tiempo de generación: 25-05-2022 a las 02:12:47
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 7.4.29
 
@@ -41,7 +41,9 @@ CREATE TABLE `capitulo` (
 INSERT INTO `capitulo` (`id`, `num`, `mangaid`, `usuarioid`) VALUES
 (1, 5, 1, 30),
 (2, 4, 3, 0),
-(3, 5, 1, 2);
+(3, 5, 1, 2),
+(4, 0, 1, 30),
+(5, 1, 1, 25);
 
 -- --------------------------------------------------------
 
@@ -52,16 +54,18 @@ INSERT INTO `capitulo` (`id`, `num`, `mangaid`, `usuarioid`) VALUES
 CREATE TABLE `manga` (
   `id` int(11) NOT NULL,
   `nombre` varchar(50) NOT NULL,
-  `descripcion` text NOT NULL
+  `descripcion` text NOT NULL,
+  `port` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `manga`
 --
 
-INSERT INTO `manga` (`id`, `nombre`, `descripcion`) VALUES
-(1, 'Berserk', 'Guts, un ex-mercenario conocido como el \"Espadachín Negro\", y en búsqueda de su venganza. Luego de una tumultuosa infancia, él finalmente encuentra a alguien a quien respeta y en quien puede confiar; y todo se desmorona cuando esta persona le arrebata todo lo importante para él, con el propósito de cumplir sus propios deseos. Ahora, siendo portador de la marca, Guts se encuentra condenado a un destino en el que es implacablemente perseguido por seres demoníacos.\r\nEncaminado en una terrible misión llena de desgracia, Guts, armado con una espada gigante y una fuerza monstruosa, no dejará que nada lo detenga, ni siquiera la misma muerte, hasta que sea capaz de tomar la cabeza de aquél que le robó toda su humanidad.'),
-(3, 'Full Metal Alchemist', 'La historia se centra en dos hermanos, Edward Elric y Alphonse Elric que rompieron el mayor tabú de la alquimia, la trasmutación humana al tratar de revivir a su fallecida madre; en consecuencia Edward pierde su pierna izquierda y Alphonse pierde todo su cuerpo, Edward para salvar a su hermano sella su alma en una gran armadura de hierro a cambio de su brazo derecho; ahora los dos con un nuevo objetivo buscan desesperadamente la piedra filosofal para poder regresar sus cuerpos a la normalidad...');
+INSERT INTO `manga` (`id`, `nombre`, `descripcion`, `port`) VALUES
+(1, 'Berserk', 'Guts, un ex-mercenario conocido como el \"Espadachín Negro\", y en búsqueda de su venganza. Luego de una tumultuosa infancia, él finalmente encuentra a alguien a quien respeta y en quien puede confiar; y todo se desmorona cuando esta persona le arrebata todo lo importante para él, con el propósito de cumplir sus propios deseos. Ahora, siendo portador de la marca, Guts se encuentra condenado a un destino en el que es implacablemente perseguido por seres demoníacos.\nEncaminado en una terrible misión llena de desgracia, Guts, armado con una espada gigante y una fuerza monstruosa, no dejará que nada lo detenga, ni siquiera la misma muerte, hasta que sea capaz de tomar la cabeza de aquél que le robó toda su humanidad.', 'Imagenes/berserk.jpg'),
+(3, 'Full Metal Alchemist', 'La historia se centra en dos hermanos, Edward Elric y Alphonse Elric que rompieron el mayor tabú de la alquimia, la trasmutación humana al tratar de revivir a su fallecida madre; en consecuencia Edward pierde su pierna izquierda y Alphonse pierde todo su cuerpo, Edward para salvar a su hermano sella su alma en una gran armadura de hierro a cambio de su brazo derecho; ahora los dos con un nuevo objetivo buscan desesperadamente la piedra filosofal para poder regresar sus cuerpos a la normalidad...', NULL),
+(5, 'Dragon Ball', 'Goku y sus amigos', NULL);
 
 -- --------------------------------------------------------
 
@@ -91,7 +95,7 @@ INSERT INTO `pagina` (`img`, `cap`) VALUES
 -- Indices de la tabla `capitulo`
 --
 ALTER TABLE `capitulo`
-  ADD PRIMARY KEY (`id`,`mangaid`),
+  ADD PRIMARY KEY (`id`,`mangaid`) USING BTREE,
   ADD KEY `mangaid` (`mangaid`);
 
 --
@@ -115,13 +119,13 @@ ALTER TABLE `pagina`
 -- AUTO_INCREMENT de la tabla `capitulo`
 --
 ALTER TABLE `capitulo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `manga`
 --
 ALTER TABLE `manga`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Restricciones para tablas volcadas

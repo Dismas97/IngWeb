@@ -1,7 +1,7 @@
 window.addEventListener("load", getManga());
 
 async function getManga(){
-    const manga = await fetch('manga/1', {
+    const manga = await fetch('manga/3', {
         method: 'POST',
         headers: {
         'Accept': 'application/json',
