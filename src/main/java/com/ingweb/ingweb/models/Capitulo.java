@@ -11,7 +11,7 @@ import java.util.List;
 @Entity
 @Table(name="capitulo")
 public class Capitulo implements Comparable<Capitulo> {
-    @Getter @Setter @Column(name = "id") @Id
+    @Getter @Setter @Column(name = "id") @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @Getter @Setter @Column(name = "usuarioid")
     private long usuarioid;

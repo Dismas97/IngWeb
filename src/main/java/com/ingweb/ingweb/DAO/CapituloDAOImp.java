@@ -6,6 +6,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -27,8 +32,19 @@ public class CapituloDAOImp implements CapituloDAO{
     }
 
     @Override
-    public void subirCapitulo(Capitulo aux, List<MultipartFile> paginas) {
-        
+    public void subirCapitulo(Capitulo aux, List<MultipartFile> paginas) throws IOException {
+        Capitulo subido = conexion.merge(aux);
 
+        String ruta= "Imagenes\\"+subido.obtenerManga().getId()+"\\"+subido.getId();
+
+        Path carpeta = Paths.get("src\\main\\resources\\static\\"+ruta);
+
+        Files.createDirectory(carpeta);
+        List<String> pag = new ArrayList<>();
+        for (MultipartFile p : paginas){
+            Files.copy(p.getInputStream(),carpeta.resolve(p.getOriginalFilename()));
+            pag.add(ruta+"\\"+p.getOriginalFilename());
+        }
+        subido.setPag(pag);
     }
 }
