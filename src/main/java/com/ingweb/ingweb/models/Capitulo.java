@@ -13,16 +13,18 @@ import java.util.List;
 public class Capitulo implements Comparable<Capitulo> {
     @Getter @Setter @Column(name = "id") @Id
     private long id;
-
     @Getter @Setter @Column(name = "usuarioid")
-    private long usuarioId;
+    private long usuarioid;
     @Getter @Setter @Column(name = "num")
     private int num;
     @ManyToOne @JoinColumn(name="mangaid")
     Manga manga;
-
     public void setearManga(Manga manga) {
         this.manga = manga;
+    }
+
+    public Manga obtenerManga(){
+        return this.manga;
     }
     @Getter @Setter
     @ElementCollection

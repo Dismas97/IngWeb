@@ -18,6 +18,8 @@ import java.util.List;
 public class MangaController {
     @Autowired
     MangaDAO dao = new MangaDAOImp();
+    @Autowired
+    CapituloDAO daoCap= new CapituloDAOImp();
     @RequestMapping(value = "manga/{id}")
     public Manga getManga(@PathVariable long id) {
         return dao.getManga(id);
@@ -27,14 +29,12 @@ public class MangaController {
     public List<Manga> getManga(@RequestParam String nombre){ return dao.getMangas(nombre);}
 
     @PostMapping(value = "manga/{id}/subida")
-    public ResponseEntity<String> subirCapitulo(@PathVariable long mangaid, @RequestParam("numCap") int numCap,
+    public ResponseEntity<String> subirCapitulo(@PathVariable long id, @RequestParam("numCap") int numCap,
                                                 @RequestParam("usuario") long iduser,
                                                 @RequestParam("paginas") List<MultipartFile> paginas){
         Capitulo aux = new Capitulo();
-        aux.setNum(numCap);aux.setUsuarioId(iduser);
-        aux.setearManga(dao.getManga(mangaid));
-
-        CapituloDAO daoCap= new CapituloDAOImp();
+        aux.setNum(numCap);aux.setUsuarioid(iduser);
+        aux.setearManga(dao.getManga(id));
         try {
             daoCap.subirCapitulo(aux,paginas);
             return ResponseEntity.status(HttpStatus.OK).body("Capitulo subido con exito");

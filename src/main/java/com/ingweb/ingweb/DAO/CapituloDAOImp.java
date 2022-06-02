@@ -28,6 +28,7 @@ public class CapituloDAOImp implements CapituloDAO{
 
     @Override
     public void subirCapitulo(Capitulo aux, List<MultipartFile> paginas) {
-        conexion.merge(aux);
+        
+
     }
 }
