@@ -2,6 +2,7 @@ package com.ingweb.ingweb.DAO;
 import com.ingweb.ingweb.models.Capitulo;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -23,5 +24,10 @@ public class CapituloDAOImp implements CapituloDAO{
     public List<Capitulo> getCapitulos(long mangaid) {
         String query = "From Capitulo C WHERE C.manga.id = "+mangaid+" ORDER BY C.num";
         return conexion.createQuery(query).getResultList();
+    }
+
+    @Override
+    public void subirCapitulo(Capitulo aux, List<MultipartFile> paginas) {
+        conexion.merge(aux);
     }
 }

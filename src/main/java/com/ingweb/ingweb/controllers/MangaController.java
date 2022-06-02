@@ -1,13 +1,16 @@
 package com.ingweb.ingweb.controllers;
 
+import com.ingweb.ingweb.DAO.CapituloDAO;
+import com.ingweb.ingweb.DAO.CapituloDAOImp;
 import com.ingweb.ingweb.DAO.MangaDAO;
 import com.ingweb.ingweb.DAO.MangaDAOImp;
+import com.ingweb.ingweb.models.Capitulo;
 import com.ingweb.ingweb.models.Manga;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -23,4 +26,22 @@ public class MangaController {
     @RequestMapping(value = "manga/busqueda")
     public List<Manga> getManga(@RequestParam String nombre){ return dao.getMangas(nombre);}
 
+    @PostMapping(value = "manga/{id}/subida")
+    public ResponseEntity<String> subirCapitulo(@PathVariable long mangaid, @RequestParam("numCap") int numCap,
+                                                @RequestParam("usuario") long iduser,
+                                                @RequestParam("paginas") List<MultipartFile> paginas){
+        Capitulo aux = new Capitulo();
+        aux.setNum(numCap);aux.setUsuarioId(iduser);
+        aux.setearManga(dao.getManga(mangaid));
+
+        CapituloDAO daoCap= new CapituloDAOImp();
+        try {
+            daoCap.subirCapitulo(aux,paginas);
+            return ResponseEntity.status(HttpStatus.OK).body("Capitulo subido con exito");
+        }
+        catch (Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Hubo un error al subir el archivo");
+        }
+
+    }
 }
