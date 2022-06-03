@@ -6,28 +6,22 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <h1>asd<h1/>
         <title>CASI supply a title</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="css/newcss.css" rel="stylesheet" type="text/css"/>
-        <script>
-            function collapseChapter(itemID) {
-                if(document.getElementById(itemID).style.display=="none"){
-                    document.getElementById(itemID).style.display = "block";
-                }else{
-                    document.getElementById(itemID).style.display = "none";
-                }
-            }
-        </script>
+        <link href="css/style.css" rel="stylesheet" type="text/css"/>
+        <script src = "JS/HeaderMangaInicializar.js"></script>
+        <script src="JS/app.js"></script>
     </head>
     <body>
+
         <div class="pb-5">
         <header>
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container">
                     <a>
-                    TU<b>MANGAcambie estooooo</b><i>ONLINE</i>
+                    TU<b>MANGA</b><i>ONLINE</i>
                     </a>               
                 </div>
             </nav>
@@ -41,57 +35,17 @@ and open the template in the editor.
                 </section>
             </header>
         </section>
-        
-        <div class="container p-0 p-sm-2">
-            <div class="row">
-                <div class="col-12 col-lg-8">
-                    <div class="row">
-                        <div class="col-12">
-                            <h2>Capítulos</h2>
-                            <div class="card chapters" id="chapters">
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item p-0 bg-light upload-link" data-index="0">
-                                        <h4 class="px-2 py-3 m-0">
-                                            <div class="row">
-                                                <div class="col-10 text-truncate">
-                                                    <a style="display: block;" class="btn-collapse" onclick="collapseChapter('collapsible782467')" role="button"><i class="fa fa-chevron-down fa-fw"></i> Capítulo 5.00
-                                                    </a>
-                                                 </div>
-                                            </div>
-                                        </h4>
-                                        <div style="display: none;" id="collapsible782467">
-                                            <hr class="mx-0 my-1">
-                                            <div class="card chapter-list-element">
-                                                <ul class="list-group list-group-flush chapter-list">
-                                                     <li class="list-group-item">
-                                                        <div class="row">
-                                                            <div class="col-4 col-md-6 text-truncate">
-                                                                <span class="">
-                                                                     <a href="https://lectortmo.com/groups/87756/kayros-translations">Kayros translations</a>
-                                                                </span>
-                                                            </div>
-                                                            <div class="col-2 col-sm-1 text-right">
-                                                                <a href="https://lectortmo.com/view_uploads/1005441" class="btn btn-default btn-sm">
-                                                                    <span class="fas fa-play fa-2x" style="color:#2957ba"></span>
-                                                                 </a>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        </li>
-
-                                    </div>
-                                </div>
-                        </div>
-                    </div>
+        <div class="cont-menu">
+            <h2>Capitulos</h2>
+            <div class="row2">
+                <div class="cont-enlace" id="capitulos">
+                    <div class="enlace" id="verCap"></div></div>
             </div>
-        </div>   
-        
-        
+            <div><a class="boton_personalizado" href="subirCapitulo.html">Subir capitulo</a></div>
         </div>
-        <script src = "JS/HeaderMangaInicializar.js"></script>
+        </div>
+
+
     </body>
 
 </html>
