@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        window.addEventListener("load", imprimirPags());
+
+        async function imprimirPags(){
+
+            const valores = window.location.search;
+            const urlParams = new URLSearchParams(valores);
+            const ruta = 'manga/'+urlParams.get('mangaid')+'/'+urlParams.get('capid');
+
+            const cap = await fetch(ruta, {
+                method: 'GET',
+                headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+                }
+            });
+            const capjson = await cap.json();
+            document.write('<input type="button" value="Volver Atras" onclick="history.back()">');
+            for (var i=0; i<capjson.pag.length; i++){
+              document.write('<img src="'+capjson.pag[i]+'">');
+            }
+            document.write('<input type="button" value="Volver Atras" onclick="history.back()">');
+        }
+    </script>
+</head>
+<body>
+</body>
+</html>

@@ -11,6 +11,7 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="css/newcss.css" rel="stylesheet" type="text/css"/>
         <link href="css/style.css" rel="stylesheet" type="text/css"/>
+
         <script src = "JS/HeaderMangaInicializar.js"></script>
         <script src="JS/app.js"></script>
     </head>
@@ -71,9 +72,11 @@ and open the template in the editor.
         .then((response) => response.json())
         .then((result) => {
           console.log('Archivos enviados:', result);
+          location.reload();
         })
         .catch((error) => {
           console.error('Malio Sal:', error);
+          location.reload();
         });
         }
     </script>
