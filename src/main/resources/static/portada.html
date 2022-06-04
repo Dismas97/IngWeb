@@ -41,10 +41,13 @@ and open the template in the editor.
                 <div class="cont-enlace" id="capitulos">
                     <div class="enlace" id="verCap"></div></div>
             </div>
-            <div><a class="boton_personalizado" href="subirCapitulo.html">Subir capitulo</a></div>
-            <input type="file" id="paginas" multiple>
-            <input type="number" id="num-cap" min="0">
-            <button onclick="enviar()">Enviar</button>
+            <div style="margin: -60px 600px;">
+            <input type="file" id="paginas" class="custom-file-input" multiple>
+            <div class="quantity" style="margin:  10px;">
+               <b>Capitulo:</b> <input type="number" id="num-cap" min="0">
+            </div>
+            <button class="bn60" onclick="enviar()" style="margin: -25px 50px;">Enviar</button>
+            </div>
         </div>
         </div>
     <script>
