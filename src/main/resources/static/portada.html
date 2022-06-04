@@ -42,6 +42,7 @@ and open the template in the editor.
             </div>
             <div><a class="boton_personalizado" href="subirCapitulo.html">Subir capitulo</a></div>
             <input type="file" id="paginas" multiple>
+            <input type="number" id="num-cap" min="0">
             <button onclick="enviar()">Enviar</button>
         </div>
         </div>
@@ -55,9 +56,10 @@ and open the template in the editor.
 
         const data = new FormData();
         const input =  document.getElementById('paginas');
+        const numCap =  document.getElementById('num-cap').value;
 
         data.append('usuario', '123');
-        data.append('numCap', '6');
+        data.append('numCap', numCap);
 
         for (const file of input.files) {
           data.append('paginas',file,file.name);
