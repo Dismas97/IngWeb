@@ -41,9 +41,40 @@ and open the template in the editor.
                     <div class="enlace" id="verCap"></div></div>
             </div>
             <div><a class="boton_personalizado" href="subirCapitulo.html">Subir capitulo</a></div>
+            <input type="file" id="paginas" multiple>
+            <button onclick="enviar()">Enviar</button>
         </div>
         </div>
+    <script>
+    async function enviar(){
 
+        const valores = window.location.search;
+        const urlParams = new URLSearchParams(valores);
+        const ruta = 'manga/'+urlParams.get('id')+'/subida';
+
+
+        const data = new FormData();
+        const input =  document.getElementById('paginas');
+
+        data.append('usuario', '123');
+        data.append('numCap', '6');
+
+        for (const file of input.files) {
+          data.append('paginas',file,file.name);
+        }
+        fetch(ruta, {
+          method: 'POST',
+          body: data
+        })
+        .then((response) => response.json())
+        .then((result) => {
+          console.log('Archivos enviados:', result);
+        })
+        .catch((error) => {
+          console.error('Malio Sal:', error);
+        });
+        }
+    </script>
 
     </body>
 
