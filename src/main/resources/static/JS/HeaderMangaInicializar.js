@@ -1,7 +1,10 @@
 window.addEventListener("load", getManga());
 
 async function getManga(){
-    const manga = await fetch('manga/1', {
+    const valores = window.location.search;
+    const urlParams = new URLSearchParams(valores);
+    const ruta = 'manga/'+urlParams.get('id');
+    const manga = await fetch(ruta, {
         method: 'GET',
         headers: {
         'Accept': 'application/json',

@@ -25,6 +25,9 @@ public class MangaController {
         return dao.getManga(id);
     }
 
+    @RequestMapping(value = "manga")
+    public List<Manga> getMangas(){return dao.getMangas();}
+
     @RequestMapping(value = "manga/busqueda")
     public List<Manga> getManga(@RequestParam String nombre){ return dao.getMangas(nombre);}
 

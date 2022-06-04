@@ -25,4 +25,9 @@ public class MangaDAOImp implements MangaDAO{
         String query = "From Manga as M WHERE M.nombre LIKE :nombre";
         return conexion.createQuery(query).setParameter("nombre", "%" + nombre + "%").getResultList();
     }
+
+    public List<Manga> getMangas(){
+        String query = "From Manga";
+        return conexion.createQuery(query).getResultList();
+    }
 }

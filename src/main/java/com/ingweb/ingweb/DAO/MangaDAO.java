@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface MangaDAO {
     Manga getManga(long id);
-
     public List<Manga> getMangas(String nombre);
+    public List<Manga> getMangas();
 }
