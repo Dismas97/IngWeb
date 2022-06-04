@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 04-06-2022 a las 18:17:47
+-- Tiempo de generación: 05-06-2022 a las 01:04:54
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 7.4.29
 
@@ -39,9 +39,7 @@ CREATE TABLE `capitulo` (
 --
 
 INSERT INTO `capitulo` (`id`, `num`, `mangaid`, `usuarioid`) VALUES
-(1, 5, 1, 30),
-(2, 4, 3, 0),
-(3, 5, 1, 2);
+(53, 208, 7, 123);
 
 -- --------------------------------------------------------
 
@@ -63,7 +61,8 @@ CREATE TABLE `manga` (
 INSERT INTO `manga` (`id`, `nombre`, `descripcion`, `port`) VALUES
 (1, 'Berserk', 'Guts, un ex-mercenario conocido como el \"Espadachín Negro\", y en búsqueda de su venganza. Luego de una tumultuosa infancia, él finalmente encuentra a alguien a quien respeta y en quien puede confiar; y todo se desmorona cuando esta persona le arrebata todo lo importante para él, con el propósito de cumplir sus propios deseos. Ahora, siendo portador de la marca, Guts se encuentra condenado a un destino en el que es implacablemente perseguido por seres demoníacos.\nEncaminado en una terrible misión llena de desgracia, Guts, armado con una espada gigante y una fuerza monstruosa, no dejará que nada lo detenga, ni siquiera la misma muerte, hasta que sea capaz de tomar la cabeza de aquél que le robó toda su humanidad.', 'Imagenes/1/portada/berserk.jpg'),
 (3, 'Full Metal Alchemist', 'La historia se centra en dos hermanos, Edward Elric y Alphonse Elric que rompieron el mayor tabú de la alquimia, la trasmutación humana al tratar de revivir a su fallecida madre; en consecuencia Edward pierde su pierna izquierda y Alphonse pierde todo su cuerpo, Edward para salvar a su hermano sella su alma en una gran armadura de hierro a cambio de su brazo derecho; ahora los dos con un nuevo objetivo buscan desesperadamente la piedra filosofal para poder regresar sus cuerpos a la normalidad...', 'Imagenes/3/portada/fma.jpg'),
-(5, 'Dragon Ball', 'Son Goku, es un niño muy especial que ha tenido que valerse por sí mismo en medio de la naturaleza y sin contacto con otras personas. Un día conoció a Bulma, una chica que busca las siete Esferas del Dragón, estos son elementos mágicos que al ser reunidos invocan a un dios dragón llamado Shenlong, el cual concederá un único deseo, cualquiera que este sea. Goku se une a Bulma en la búsqueda de las esferas sin imaginar que hay otros seres muy peligrosos que también las desean.', 'Imagenes/5/portada/db.jpg');
+(5, 'Dragon Ball', 'Son Goku, es un niño muy especial que ha tenido que valerse por sí mismo en medio de la naturaleza y sin contacto con otras personas. Un día conoció a Bulma, una chica que busca las siete Esferas del Dragón, estos son elementos mágicos que al ser reunidos invocan a un dios dragón llamado Shenlong, el cual concederá un único deseo, cualquiera que este sea. Goku se une a Bulma en la búsqueda de las esferas sin imaginar que hay otros seres muy peligrosos que también las desean.', 'Imagenes/5/portada/db.jpg'),
+(7, 'One Punch Man', 'La historia tiene lugar en una de las metrópolis de ficción de la Tierra, la Ciudad-Z. ¡Sigue la vida de un héroe promedio que gana todas sus peleas con un solo puño! Esto le causa un montón de frustración, ahora ya no siente la adrenalina y la emoción de una dura pelea. Tal vez ese riguroso entrenamiento para volverse fuerte no valió la pena. Después de todo, ¿qué tiene de bueno tener un poder tan aplastante?', 'Imagenes/7/portada/opm.jpg');
 
 -- --------------------------------------------------------
 
@@ -81,9 +80,53 @@ CREATE TABLE `pagina` (
 --
 
 INSERT INTO `pagina` (`img`, `cap`) VALUES
-('Imagenes/01.jpg', 1),
-('Imagenes/1.jpg', 2),
-('Imagenes/2.jpg', 2);
+('Imagenes\\7\\53\\1.jpg', 53),
+('Imagenes\\7\\53\\10.jpg', 53),
+('Imagenes\\7\\53\\11.jpg', 53),
+('Imagenes\\7\\53\\12.jpg', 53),
+('Imagenes\\7\\53\\13.jpg', 53),
+('Imagenes\\7\\53\\14.jpg', 53),
+('Imagenes\\7\\53\\15.jpg', 53),
+('Imagenes\\7\\53\\16.jpg', 53),
+('Imagenes\\7\\53\\17.jpg', 53),
+('Imagenes\\7\\53\\18.jpg', 53),
+('Imagenes\\7\\53\\19.jpg', 53),
+('Imagenes\\7\\53\\2.jpg', 53),
+('Imagenes\\7\\53\\20.jpg', 53),
+('Imagenes\\7\\53\\21.jpg', 53),
+('Imagenes\\7\\53\\22.jpg', 53),
+('Imagenes\\7\\53\\23.jpg', 53),
+('Imagenes\\7\\53\\24.jpg', 53),
+('Imagenes\\7\\53\\25.jpg', 53),
+('Imagenes\\7\\53\\26.jpg', 53),
+('Imagenes\\7\\53\\27.jpg', 53),
+('Imagenes\\7\\53\\28.jpg', 53),
+('Imagenes\\7\\53\\29.jpg', 53),
+('Imagenes\\7\\53\\3.jpg', 53),
+('Imagenes\\7\\53\\30.jpg', 53),
+('Imagenes\\7\\53\\31.jpg', 53),
+('Imagenes\\7\\53\\32.jpg', 53),
+('Imagenes\\7\\53\\33.jpg', 53),
+('Imagenes\\7\\53\\34.jpg', 53),
+('Imagenes\\7\\53\\35.jpg', 53),
+('Imagenes\\7\\53\\36.jpg', 53),
+('Imagenes\\7\\53\\37.jpg', 53),
+('Imagenes\\7\\53\\38.jpg', 53),
+('Imagenes\\7\\53\\39.jpg', 53),
+('Imagenes\\7\\53\\4.jpg', 53),
+('Imagenes\\7\\53\\40.jpg', 53),
+('Imagenes\\7\\53\\41.jpg', 53),
+('Imagenes\\7\\53\\42.jpg', 53),
+('Imagenes\\7\\53\\43.jpg', 53),
+('Imagenes\\7\\53\\44.jpg', 53),
+('Imagenes\\7\\53\\45.jpg', 53),
+('Imagenes\\7\\53\\46.jpg', 53),
+('Imagenes\\7\\53\\47.jpg', 53),
+('Imagenes\\7\\53\\5.jpg', 53),
+('Imagenes\\7\\53\\6.jpg', 53),
+('Imagenes\\7\\53\\7.jpg', 53),
+('Imagenes\\7\\53\\8.jpg', 53),
+('Imagenes\\7\\53\\9.jpg', 53);
 
 -- --------------------------------------------------------
 
@@ -139,13 +182,13 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `capitulo`
 --
 ALTER TABLE `capitulo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT de la tabla `manga`
 --
 ALTER TABLE `manga`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
