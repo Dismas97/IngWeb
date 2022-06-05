@@ -20,7 +20,13 @@
                 }
             });
             const capjson = await cap.json();
-            document.write('<input type="button" value="Volver Atras" onclick="history.back()">');
+            document.write('<input type="button" value="Volver Atras" onclick="history.back()"><br><br>');
+
+            var customSort = function (a, b) {
+                return (Number(a.match(/(\d+)/g)[2]) - Number((b.match(/(\d+)/g)[2])));
+            }
+            capjson.pag.sort(customSort);
+
             for (var i=0; i<capjson.pag.length; i++){
               document.write('<img src="'+capjson.pag[i]+'">');
             }
