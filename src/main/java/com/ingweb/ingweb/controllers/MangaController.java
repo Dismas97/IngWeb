@@ -34,17 +34,19 @@ public class MangaController {
     @PostMapping(value = "manga/{id}/subida")
     public ResponseEntity<String> subirCapitulo(@PathVariable long id, @RequestParam("numCap") int numCap,
                                                 @RequestParam("usuario") long iduser,
-                                                @RequestParam("paginas") List<MultipartFile> paginas){
+                                                @RequestParam("paginas") List<MultipartFile> paginas) {
         Capitulo aux = new Capitulo();
-        aux.setNum(numCap);aux.setUsuarioid(iduser);
+        aux.setNum(numCap);
+        aux.setUsuarioid(iduser);
         aux.setearManga(dao.getManga(id));
         try {
-            daoCap.subirCapitulo(aux,paginas);
+            daoCap.subirCapitulo(aux, paginas);
             return ResponseEntity.status(HttpStatus.OK).body("Capitulo subido con exito");
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Hubo un error al subir el archivo");
         }
 
     }
+
+
 }

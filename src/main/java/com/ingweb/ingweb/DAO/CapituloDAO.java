@@ -13,6 +13,5 @@ import java.util.List;
 public interface CapituloDAO {
     Capitulo getCapitulo(long mangaid, long capid);
     List<Capitulo> getCapitulos(long mangaid);
-
     void subirCapitulo(Capitulo aux, List<MultipartFile> paginas) throws IOException;
 }

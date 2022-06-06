@@ -8,7 +8,7 @@ import java.util.List;
 @Entity
 @Table(name="manga")
 public class Manga {
-    @Getter @Setter @Id
+    @Getter @Setter @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @Getter @Setter
     private String nombre;
