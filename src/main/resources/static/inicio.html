@@ -24,17 +24,18 @@
         crearTarjetas(mangajson);
       }
 
-      function crearTarjetas(mangajson){
+      function crearTarjetas(listaCargar){
         resultado = '<div class="container"><div class="row row-cols-1 row-cols-md-6 g-4">';
-        for (var i = 0; i < mangajson.length; i++){
-            resultado += '<div class="col"><a href="portada.html?id='+mangajson[i].id+'">'+
-                            '<div class="card h-100 text-center text-bg-dark mb-3 img-fluid"><img src="'+mangajson[i].port+'" class="card-img-top">'+
-                              '<div class="card-body"><h5 class="card-title">'+mangajson[i].nombre+'</h5>'+
+        for (var i = 0; i < listaCargar.length; i++){
+            resultado += '<div class="col"><a href="portada.html?id='+listaCargar[i].id+'">'+
+                            '<div class="card h-100 text-center text-bg-dark mb-3 img-fluid"><img src="'+listaCargar[i].port+'" class="card-img-top">'+
+                              '<div class="card-body"><h5 class="card-title">'+listaCargar[i].nombre+'</h5>'+
                                 '</div></div></a></div>';
         }
         resultado+='</div></div>';
         var nuevo = document.getElementById("mangaHeader");
         nuevo.innerHTML = resultado;
+        event.preventDefault();
       }
  
       async function buscar(){
@@ -52,7 +53,7 @@
         <div class="collapse navbar-collapse" id="navbarText">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">MLG!</a>
+              <a class="nav-link active" aria-current="page" href="javascript:window.location.href=window.location.href">MLG!</a>
             </li>
           </ul>
         </div>
