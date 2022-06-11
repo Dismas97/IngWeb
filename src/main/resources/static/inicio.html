@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Inicio</title>
+    <link 
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" 
+    rel="stylesheet" 
+    integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" 
+    crossorigin="anonymous">
+    <script>
+      window.addEventListener("load", cargar());
+
+      async function cargar(){
+        const manga = await fetch('manga', {
+            method: 'GET',
+            headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+            }
+        });
+        globalThis.mangajson = await manga.json();
+        crearTarjetas(mangajson);
+      }
+
+      function crearTarjetas(mangajson){
+        resultado = '<div class="container"><div class="row row-cols-1 row-cols-md-6 g-4">';
+        for (var i = 0; i < mangajson.length; i++){
+            resultado += '<div class="col"><a href="portada.html?id='+mangajson[i].id+'">'+
+                            '<div class="card h-100 text-center text-bg-dark mb-3 img-fluid"><img src="'+mangajson[i].port+'" class="card-img-top">'+
+                              '<div class="card-body"><h5 class="card-title">'+mangajson[i].nombre+'</h5>'+
+                                '</div></div></a></div>';
+        }
+        resultado+='</div></div>';
+        var nuevo = document.getElementById("mangaHeader");
+        nuevo.innerHTML = resultado;
+      }
+ 
+      async function buscar(){
+        const buscado=document.getElementById("nombreBuscar").value;
+        const buscadosSolo = mangajson.filter(function (entry) {
+            return (entry.nombre.toLowerCase()).includes(buscado.toLowerCase());
+        });
+        crearTarjetas(buscadosSolo);
+      }
+    </script>
+
+  <body class="text-bg-secondary p-3">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+        <div class="collapse navbar-collapse" id="navbarText">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">MLG!</a>
+            </li>
+          </ul>
+        </div>
+        <form class="d-flex" role="search">
+          <input class="form-control me-2" type="search" placeholder="Buscar Manga" id="nombreBuscar" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit" onclick="buscar()">&#8981</button>
+        </form>
+      </div>
+    </nav><br>
+    <section class="element-header-content" id="mangaHeader">
+
+    </section>
+  </body>
+</html>
