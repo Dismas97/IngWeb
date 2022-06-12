@@ -26,7 +26,7 @@
 			<input type="email" placeholder="Email" class="input" />
 			<input type="password" placeholder="Password" class="input" />
 			<a href="#" class="link">Olvido su contraseña?..</a>
-			<a href="manga.html">
+			<a href="index.html">
 			<input type="button" value="Ingresar" class="btn">
 			</a>
 		</form>
@@ -46,21 +46,21 @@
 </div>
 </body>
 <script>
-		const signInBtn = document.getElementById("signIn");
-			 const signUpBtn = document.getElementById("signUp");
-			 const fistForm = document.getElementById("form1");
-			 const secondForm = document.getElementById("form2");
-			 const container = document.querySelector(".container");
+	const signInBtn = document.getElementById("signIn");
+	const signUpBtn = document.getElementById("signUp");
+	const fistForm = document.getElementById("form1");
+	const secondForm = document.getElementById("form2");
+	const container = document.querySelector(".container");
 
-			 signInBtn.addEventListener("click", () => {
-container.classList.remove("right-panel-active");
-});
+	signInBtn.addEventListener("click", () => {
+		container.classList.remove("right-panel-active");
+	});
 
-signUpBtn.addEventListener("click", () => {
-container.classList.add("right-panel-active");
-});
+	signUpBtn.addEventListener("click", () => {
+		container.classList.add("right-panel-active");
+	});
 
-fistForm.addEventListener("submit", (e) => e.preventDefault());
-secondForm.addEventListener("submit", (e) => e.preventDefault());
+	fistForm.addEventListener("submit", (e) => e.preventDefault());
+	secondForm.addEventListener("submit", (e) => e.preventDefault());
 </script>
 </html>
