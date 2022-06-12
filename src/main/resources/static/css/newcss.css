@@ -31,24 +31,14 @@ body {
 
 nav{ display: block;}
 
-.navbar, .navbar.container, .navbar.container-fluid {
-    display: -webkit-box;
-    display: -ms-flexbox;
+.navbar, .navbar.container{
     display: flex;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    -webkit-box-pack: justify;
-    -ms-flex-pack: justify;
-    justify-content: space-between;
-    
 }
 
 .navbar{
-    position: relative;
-    padding: 1rem 1.5rem;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items:center;
 }
 .navbar-brand {
     display: inline-block;
@@ -57,13 +47,7 @@ nav{ display: block;}
     line-height: inherit;
     white-space: nowrap;
 }
-.container-fluid {
-    width: 100%;
-    padding-right: 15px;
-    padding-left: 15px;
-    margin-right: auto;
-    margin-left: auto;
-}
+
 .container {
     width: 100%;
     padding-right: 15px;
@@ -77,9 +61,6 @@ a {
     text-decoration: none;
     background-color: transparent;
     -webkit-text-decoration-skip: objects;
-}
-.pb-5{
-    padding-bottom: 3rem;
 }
 div{
     display:block;
@@ -178,12 +159,7 @@ h1 {
     padding-right: 15px;
     padding-left: 15px;
 }
-.mb-2, .my-2 {
-    margin-bottom: 0.5rem!important;
-}
-.mt-2, .my-2 {
-    margin-top: 0.5rem!important;
-}
+
 
 img {
     vertical-align: middle;
@@ -520,4 +496,83 @@ input[type=number]
   position: absolute;
   bottom: -1px;
   height: 50%;
+}
+form {
+  background: #fff;
+  color: #133783;
+border: 1px solid;
+border-color: #e5e6e9 #dfe0e4 #d0d1d5;
+-webkit-border-radius: 5px;
+  margin-top: 10px;
+  padding: 10px;
+}
+input {
+	outline: none;
+}
+input[type=search] {
+	-webkit-appearance: textfield;
+	-webkit-box-sizing: content-box;
+	font-family: inherit;
+	font-size: 100%;
+}
+input::-webkit-search-decoration,
+input::-webkit-search-cancel-button {
+	display: none; /* remove the search and cancel icon */
+}
+
+/* search input field */
+input[type=search] {
+	background: #ededed url(http://webdesignerwall.com/demo/expandable-search-form/images/search-icon.png) no-repeat 9px center;
+	border: solid 1px #ccc;
+	padding: 9px 10px 9px 32px;
+	width: 55px;
+
+	-webkit-border-radius: 10em;
+	-moz-border-radius: 10em;
+	border-radius: 10em;
+
+	-webkit-transition: all .5s;
+	-moz-transition: all .5s;
+	transition: all .5s;
+}
+input[type=search]:focus {
+	width: 130px;
+	background-color: #fff;
+	border-color: #6dcff6;
+
+	-webkit-box-shadow: 0 0 5px rgba(109,207,246,.5);
+	-moz-box-shadow: 0 0 5px rgba(109,207,246,.5);
+	box-shadow: 0 0 5px rgba(109,207,246,.5);
+}
+
+/* placeholder */
+input:-moz-placeholder {
+	color: #999;
+}
+input::-webkit-input-placeholder {
+	color: #999;
+}
+
+/* demo B */
+#demo-b input[type=search] {
+	width: 15px;
+	padding-left: 10px;
+	color: transparent;
+	cursor: pointer;
+}
+#demo-b input[type=search]:hover {
+	background-color: #fff;
+}
+#demo-b input[type=search]:focus {
+	width: 130px;
+	padding-left: 32px;
+	color: #000;
+	background-color: #fff;
+	cursor: auto;
+}
+#demo-b input:-moz-placeholder {
+	color: transparent;
+}
+#demo-b input::-webkit-input-placeholder {
+	color: transparent;
 }
