@@ -2,8 +2,8 @@
   /* COLORS */
   --white: #e9e9e9;
   --gray: #333;
-  --blue: #0367a6;
-  --lightblue: #008997;
+  --blue: #000000;
+  --lightblue: #808080;
 
   /* RADII */
   --button-radius: 0.7rem;
@@ -103,7 +103,7 @@ body {
 
 .overlay {
   background-color: var(--lightblue);
-  background: url("../Imagenes/fondochico.png");
+  background: url("../Imagenes/fondochico.jpg");
     background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
