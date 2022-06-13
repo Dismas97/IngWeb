@@ -1,11 +1,13 @@
 package com.ingweb.ingweb.DAO;
 import com.ingweb.ingweb.models.Manga;
+import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -39,22 +41,24 @@ public class MangaDAOImp implements MangaDAO{
     @Override
     public void altaManga(Manga aux, MultipartFile portada) throws IOException {
         Manga subido = conexion.merge(aux);
-
-        String ruta= "Imagenes\\"+subido.getId();
-
-        Path carpeta = Paths.get("src\\main\\resources\\static\\"+ruta);
-
+        String ruta= "Imagenes\\"+subido.getId();Path carpeta = Paths.get("src\\main\\resources\\static\\"+ruta);
+        Files.createDirectory(carpeta); ruta += "\\Portada";carpeta = Paths.get("src\\main\\resources\\static\\"+ruta);
         Files.createDirectory(carpeta);
-
-        ruta += "\\Portada";
-
-        carpeta = Paths.get("src\\main\\resources\\static\\"+ruta);
-
-        Files.createDirectory(carpeta);
-
-
         Files.copy(portada.getInputStream(),carpeta.resolve(portada.getOriginalFilename()));
-
         subido.setPort(ruta+"\\"+portada.getOriginalFilename());
+    }
+
+    @Override
+    public void bajaManga(long mangaid) {
+        String query = "From Manga M WHERE M.id = :mangaid";
+        Manga aux = (Manga)conexion.createQuery(query).setParameter("mangaid",mangaid).getSingleResult();
+
+        String ruta= "Imagenes\\"+mangaid;
+        try {
+            FileUtils.deleteDirectory(new File("src\\main\\resources\\static\\"+ruta));
+        } catch (IOException e) {
+            System.out.println(e.toString());
+        }
+        conexion.remove(aux);
     }
 }

@@ -16,7 +16,7 @@ public class Manga {
     private String descripcion;
     @Getter @Setter
     private String port;
-    @Getter @Setter @OneToMany(mappedBy="manga")
+    @Getter @Setter @OneToMany(mappedBy="manga", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<Capitulo> caps;
     public void ordenarCaps(){
         caps.sort(null);

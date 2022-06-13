@@ -8,12 +8,10 @@ import com.ingweb.ingweb.models.Manga;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.persistence.PostRemove;
 import java.io.IOException;
 
 @RestController
@@ -36,6 +34,15 @@ public class UsuarioController {
             } catch (IOException e) {
                 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Hubo un error al subir el archivo");
             }
+        }
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("El usuario no es administrador");
+    }
+
+    @DeleteMapping(value = "admin/{id}/borrarmanga")
+    ResponseEntity<String> borrarManga(@PathVariable long id, @RequestParam("mangaid") long mangaid){
+        if(dao.getUsuario(id).isAdmin()){
+                mangadao.bajaManga(mangaid);
+                return ResponseEntity.status(HttpStatus.OK).body("Manga Eliminado con exito");
         }
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("El usuario no es administrador");
     }

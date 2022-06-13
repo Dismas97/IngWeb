@@ -27,10 +27,12 @@
       function crearTarjetas(listaCargar){
         resultado = '<div class="container"><div class="row row-cols-1 row-cols-md-6 g-4">';
         for (var i = 0; i < listaCargar.length; i++){
-            resultado += '<div class="col"><a href="portada.html?id='+listaCargar[i].id+'">'+
-                            '<div class="card h-100 text-center text-bg-dark mb-3 img-fluid"><img src="'+listaCargar[i].port+'" class="card-img-top">'+
-                              '<div class="card-body"><h5 class="card-title">'+listaCargar[i].nombre+'</h5>'+
-                                '</div></div></a></div>';
+            resultado += '<div class="col">'+
+                            '<div class="card h-100 text-center text-bg-dark mb-3 img-fluid"><a href="portada.html?id='+listaCargar[i].id+'">'+
+                              '<img src="'+listaCargar[i].port+'" class="card-img-top">'+
+                              '<div class="card-body"><h5 class="card-title">'+listaCargar[i].nombre+'</h5></div></a>'+
+                              '<button type="button" class="btn btn-outline-success" data-toggle="modal" data-id="'+listaCargar[i].id+'" data-target="#modalModificar">Modificar</button>'+
+                              '<button type="button" class="btn btn-outline-danger" onclick="eliminar('+listaCargar[i].id+')">Eliminar</button></div></div>';
         }
         resultado+='</div></div>';
         var nuevo = document.getElementById("mangaHeader");
@@ -65,6 +67,18 @@
         });
         cargar();
       }
+
+      async function eliminar(mangaid){
+        const manga = await fetch('admin/'+1+'/borrarmanga?mangaid='+mangaid, {
+            method: 'DELETE',
+            headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+            }
+        });
+        cargar();
+      }
+
     </script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -80,7 +94,7 @@
               <a class="nav-link active" aria-current="page" href="javascript:window.location.href=window.location.href">MLG!</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" data-toggle="modal" data-target="#exampleModalCenter">
+              <a class="nav-link" data-toggle="modal" data-target="#modalSubida">
                 SUBIR MANGA
               </a>
             </li>
@@ -96,8 +110,8 @@
 
     </section>
 
-    <!-- Modal -->
-    <div class="modal" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    <!-- Modal Subir manga-->
+    <div class="modal" id="modalSubida" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content bg-dark">
@@ -125,6 +139,40 @@
         </div>
         <div class="modal-footer d-flex justify-content-center">
           <button type="button" class="btn btn-outline-success" data-dismiss="modal" onclick="enviar()">Enviar</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="modalModificar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content bg-dark">
+        <div class="modal-header text-center">
+          <h4 class="modal-title w-100 font-weight-bold">Modificar Manga</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body mx-3">
+          <div class="form-group">
+            <label for="tituloSubida">Titulo</label>
+            <input type="text" class="form-control" id="tituloSubida" placeholder="Titulo del manga">
+          </div>
+
+          <div class="form-group">
+            <label for="descripcionSubida">Sinopsis</label>
+            <textarea class="form-control" id="descripcionSubida" rows="3" placeholder="Sinopsis del manga"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="portadaSubida">Portada</label>
+            <input type="file" class="form-control" id="portadaSubida">
+          </div>
+        </div>
+        <div class="modal-footer d-flex justify-content-center">
+          <button type="button" class="btn btn-outline-success" data-dismiss="modal" onclick="">Aplicar</button>
           <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
         </div>
       </div>
