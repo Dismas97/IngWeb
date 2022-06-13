@@ -18,6 +18,7 @@ async function getManga(){
                 +'<img class="book-thumbnail " src="'+mangajson.port+'"></div></div>'
                 +'<div class="col-12 col-md-9 element-header-content-text"><h1 class="element-title my-2">'+mangajson.nombre
                 +'</h1><p class="element-description">'+mangajson.descripcion+'</p></div></div></div>';
+                
 
     document.getElementById("mangaHeader").innerHTML = resultado;
     var capsAñadidos=[];
@@ -27,6 +28,10 @@ async function getManga(){
             capsAñadidos.push(mangajson.caps[i].num);
         }
     }
+
+
+
+    
 }
 
 
