@@ -9,7 +9,11 @@ public interface MangaDAO {
     Manga getManga(long id);
     public List<Manga> getMangas(String nombre);
     public List<Manga> getMangas();
-
     void altaManga(Manga aux, MultipartFile portada) throws IOException;
+    void bajaManga(long mangaid);
+
+    Manga modificar(long id, String nombre, String descripcion);
+
+    Manga modificar(long id, String nombre, String descripcion, MultipartFile port);
 
 }
