@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 06-06-2022 a las 20:19:09
+-- Tiempo de generación: 13-06-2022 a las 23:23:38
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 7.4.29
 
@@ -40,7 +40,8 @@ CREATE TABLE `capitulo` (
 
 INSERT INTO `capitulo` (`id`, `num`, `mangaid`, `usuarioid`) VALUES
 (53, 208, 7, 123),
-(54, 1, 1, 123);
+(54, 1, 1, 123),
+(63, 1, 24, 123);
 
 -- --------------------------------------------------------
 
@@ -60,11 +61,12 @@ CREATE TABLE `manga` (
 --
 
 INSERT INTO `manga` (`id`, `nombre`, `descripcion`, `port`) VALUES
-(1, 'Berserk', 'Guts, un ex-mercenario conocido como el \"Espadachín Negro\", y en búsqueda de su venganza. Luego de una tumultuosa infancia, él finalmente encuentra a alguien a quien respeta y en quien puede confiar; y todo se desmorona cuando esta persona le arrebata todo lo importante para él, con el propósito de cumplir sus propios deseos. Ahora, siendo portador de la marca, Guts se encuentra condenado a un destino en el que es implacablemente perseguido por seres demoníacos.\nEncaminado en una terrible misión llena de desgracia, Guts, armado con una espada gigante y una fuerza monstruosa, no dejará que nada lo detenga, ni siquiera la misma muerte, hasta que sea capaz de tomar la cabeza de aquél que le robó toda su humanidad.', 'Imagenes/1/portada/berserk.jpg'),
-(3, 'Full Metal Alchemist', 'La historia se centra en dos hermanos, Edward Elric y Alphonse Elric que rompieron el mayor tabú de la alquimia, la trasmutación humana al tratar de revivir a su fallecida madre; en consecuencia Edward pierde su pierna izquierda y Alphonse pierde todo su cuerpo, Edward para salvar a su hermano sella su alma en una gran armadura de hierro a cambio de su brazo derecho; ahora los dos con un nuevo objetivo buscan desesperadamente la piedra filosofal para poder regresar sus cuerpos a la normalidad...', 'Imagenes/3/portada/fma.jpg'),
-(5, 'Dragon Ball', 'Son Goku, es un niño muy especial que ha tenido que valerse por sí mismo en medio de la naturaleza y sin contacto con otras personas. Un día conoció a Bulma, una chica que busca las siete Esferas del Dragón, estos son elementos mágicos que al ser reunidos invocan a un dios dragón llamado Shenlong, el cual concederá un único deseo, cualquiera que este sea. Goku se une a Bulma en la búsqueda de las esferas sin imaginar que hay otros seres muy peligrosos que también las desean.', 'Imagenes/5/portada/db.jpg'),
-(7, 'One Punch Man', 'La historia tiene lugar en una de las metrópolis de ficción de la Tierra, la Ciudad-Z. ¡Sigue la vida de un héroe promedio que gana todas sus peleas con un solo puño! Esto le causa un montón de frustración, ahora ya no siente la adrenalina y la emoción de una dura pelea. Tal vez ese riguroso entrenamiento para volverse fuerte no valió la pena. Después de todo, ¿qué tiene de bueno tener un poder tan aplastante?', 'Imagenes/7/portada/opm.jpg'),
-(16, 'Hunter X Hunter', 'Doce años antes del inicio de la historia, Ging Freecss abandonó a su hijo Gon en manos de su tía Mito en Isla Ballena. Gon, quien siempre creyó que sus padres habían muerto, descubre un día gracias al aprendiz de su padre, Kite, que este aún se encuentra con vida y se ha convertido en uno de los mejores cazadores,​ individuos de élite y acreditados para el rastreo de tesoros secretos, bestias exóticas e, incluso, otros individuos.​ Motivado por esta revelación, Gon decide dejar su hogar y presentarse al examen de cazador,​ una serie de desafíos que buscan probar las habilidades, supervivencia y trabajo en equipo de sus participantes.', 'Imagenes\\16\\Portada\\hxh.jpg');
+(1, 'Berserk', 'Guts, un ex-mercenario conocido como el \"Espadachín Negro\", y en búsqueda de su venganza. Luego de una tumultuosa infancia, él finalmente encuentra a alguien a quien respeta y en quien puede confiar; y todo se desmorona cuando esta persona le arrebata todo lo importante para él, con el propósito de cumplir sus propios deseos. Ahora, siendo portador de la marca, Guts se encuentra condenado a un destino en el que es implacablemente perseguido por seres demoníacos. Encaminado en una terrible misión llena de desgracia, Guts, armado con una espada gigante y una fuerza monstruosa, no dejará que nada lo detenga, ni siquiera la misma muerte, hasta que sea capaz de tomar la cabeza de aquél que le robó toda su humanidad.', 'Imagenes\\1\\Portada\\Portada.jpg'),
+(3, 'Full Metal Alchemist', 'La historia se centra en dos hermanos, Edward Elric y Alphonse Elric que rompieron el mayor tabú de la alquimia, la trasmutación humana al tratar de revivir a su fallecida madre; en consecuencia Edward pierde su pierna izquierda y Alphonse pierde todo su cuerpo, Edward para salvar a su hermano sella su alma en una gran armadura de hierro a cambio de su brazo derecho; ahora los dos con un nuevo objetivo buscan desesperadamente la piedra filosofal para poder regresar sus cuerpos a la normalidad...', 'Imagenes\\3\\Portada\\Portada.jpg'),
+(5, 'Dragon Ball', 'Son Goku, es un niño muy especial que ha tenido que valerse por sí mismo en medio de la naturaleza y sin contacto con otras personas. Un día conoció a Bulma, una chica que busca las siete Esferas del Dragón, estos son elementos mágicos que al ser reunidos invocan a un dios dragón llamado Shenlong, el cual concederá un único deseo, cualquiera que este sea. Goku se une a Bulma en la búsqueda de las esferas sin imaginar que hay otros seres muy peligrosos que también las desean.', 'Imagenes\\5\\Portada\\Portada.jpg'),
+(7, 'One Punch Man', 'La historia tiene lugar en una de las metrópolis de ficción de la Tierra, la Ciudad-Z. ¡Sigue la vida de un héroe promedio que gana todas sus peleas con un solo puño! Esto le causa un montón de frustración, ahora ya no siente la adrenalina y la emoción de una dura pelea. Tal vez ese riguroso entrenamiento para volverse fuerte no valió la pena. Después de todo, ¿qué tiene de bueno tener un poder tan aplastante?', 'Imagenes\\7\\Portada\\Portada.jpg'),
+(18, 'Monster', 'La serie narra la historia de un neurocirujano Japonés llamado Kenzo Tenma, quien creyendo hacer lo correcto le salva la vida a un niño aparentemente normal; pero lejos de la realidad, este infante es en realidad un asesino sociópata que cambiará y destruirá las vidas de todos aquellos con los que se cruce en el camino, incluyendo al propio Tenma a quien inculpa de una serie de homicidios cometidos por él, haciendo que Tenma tenga que viajar por toda Alemania para encontrar a este individuo para detenerlo y de paso, poder demostrar su inocencia.', 'Imagenes\\18\\Portada\\Portada.jpg'),
+(24, 'Gantz', 'Kei Kurono es un estudiante egoísta y apático que se ve obligado a salvar a una persona de morir atropellada por un tren subterráneo debido a que su compañero de la infancia Masaru Kato lo llama para que le ayude. Como consecuencia él y Kato mueren en el intento.\r\n\r\nPosteriormente aparecen en un apartamento visualmente normal con otras personas igual de desconcertadas que ellos. Allí, una misteriosa esfera negra les obliga a participar de un sádico juego y para ello les pone a su disposición todo un exótico arsenal futurista que deberán aprender a usar para combatir a diversas especies de alienígenas y otras amenazas que para la gente común pasan desapercibidas.', 'Imagenes\\24\\Portada\\Portada.jpg');
 
 -- --------------------------------------------------------
 
@@ -165,6 +167,49 @@ INSERT INTO `pagina` (`img`, `cap`) VALUES
 ('Imagenes\\1\\54\\ (82).png', 54),
 ('Imagenes\\1\\54\\ (83).png', 54),
 ('Imagenes\\1\\54\\ (9).png', 54),
+('Imagenes\\24\\63\\ (1).jpg', 63),
+('Imagenes\\24\\63\\ (1).png', 63),
+('Imagenes\\24\\63\\ (10).png', 63),
+('Imagenes\\24\\63\\ (11).png', 63),
+('Imagenes\\24\\63\\ (12).png', 63),
+('Imagenes\\24\\63\\ (13).png', 63),
+('Imagenes\\24\\63\\ (14).png', 63),
+('Imagenes\\24\\63\\ (15).png', 63),
+('Imagenes\\24\\63\\ (16).png', 63),
+('Imagenes\\24\\63\\ (17).png', 63),
+('Imagenes\\24\\63\\ (18).png', 63),
+('Imagenes\\24\\63\\ (19).png', 63),
+('Imagenes\\24\\63\\ (2).jpg', 63),
+('Imagenes\\24\\63\\ (2).png', 63),
+('Imagenes\\24\\63\\ (20).png', 63),
+('Imagenes\\24\\63\\ (21).png', 63),
+('Imagenes\\24\\63\\ (22).png', 63),
+('Imagenes\\24\\63\\ (23).png', 63),
+('Imagenes\\24\\63\\ (24).png', 63),
+('Imagenes\\24\\63\\ (25).png', 63),
+('Imagenes\\24\\63\\ (26).png', 63),
+('Imagenes\\24\\63\\ (27).png', 63),
+('Imagenes\\24\\63\\ (28).png', 63),
+('Imagenes\\24\\63\\ (29).png', 63),
+('Imagenes\\24\\63\\ (3).png', 63),
+('Imagenes\\24\\63\\ (30).png', 63),
+('Imagenes\\24\\63\\ (31).png', 63),
+('Imagenes\\24\\63\\ (32).png', 63),
+('Imagenes\\24\\63\\ (33).png', 63),
+('Imagenes\\24\\63\\ (34).png', 63),
+('Imagenes\\24\\63\\ (35).png', 63),
+('Imagenes\\24\\63\\ (36).png', 63),
+('Imagenes\\24\\63\\ (37).png', 63),
+('Imagenes\\24\\63\\ (38).png', 63),
+('Imagenes\\24\\63\\ (39).png', 63),
+('Imagenes\\24\\63\\ (4).png', 63),
+('Imagenes\\24\\63\\ (40).png', 63),
+('Imagenes\\24\\63\\ (41).png', 63),
+('Imagenes\\24\\63\\ (5).png', 63),
+('Imagenes\\24\\63\\ (6).png', 63),
+('Imagenes\\24\\63\\ (7).png', 63),
+('Imagenes\\24\\63\\ (8).png', 63),
+('Imagenes\\24\\63\\ (9).png', 63),
 ('Imagenes\\7\\53\\1.jpg', 53),
 ('Imagenes\\7\\53\\10.jpg', 53),
 ('Imagenes\\7\\53\\11.jpg', 53),
@@ -275,13 +320,13 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `capitulo`
 --
 ALTER TABLE `capitulo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 
 --
 -- AUTO_INCREMENT de la tabla `manga`
 --
 ALTER TABLE `manga`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`

@@ -61,4 +61,30 @@ public class MangaDAOImp implements MangaDAO{
         }
         conexion.remove(aux);
     }
+
+    @Override
+    public Manga modificar(long id, String nombre, String descripcion) {
+        Manga aux = this.getManga(id);
+        aux.setNombre(nombre);
+        aux.setDescripcion(descripcion);
+        return aux;
+    }
+
+    @Override
+    public Manga modificar(long id, String nombre, String descripcion, MultipartFile port) {
+        Manga aux = this.modificar(id,nombre,descripcion);
+        String nombreImgViejo = aux.getPort().split("\\\\")[3];
+        String rutaImgVieja = "src\\main\\resources\\static\\"+aux.getPort();
+        String rutaImgNueva = "src\\main\\resources\\static\\Imagenes\\"+id+"\\Portada";
+        Path carpeta = Paths.get(rutaImgVieja);
+        try {
+            File viejo = new File(carpeta.toUri());
+            viejo.delete();
+            carpeta = Paths.get(rutaImgNueva);
+            Files.copy(port.getInputStream(),carpeta.resolve(port.getOriginalFilename()));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return aux;
+    }
 }

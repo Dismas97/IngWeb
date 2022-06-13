@@ -9,6 +9,10 @@
     rel="stylesheet" 
     integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" 
     crossorigin="anonymous">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script>
       window.addEventListener("load", cargar());
 
@@ -31,7 +35,7 @@
                             '<div class="card h-100 text-center text-bg-dark mb-3 img-fluid"><a href="portada.html?id='+listaCargar[i].id+'">'+
                               '<img src="'+listaCargar[i].port+'" class="card-img-top">'+
                               '<div class="card-body"><h5 class="card-title">'+listaCargar[i].nombre+'</h5></div></a>'+
-                              '<button type="button" class="btn btn-outline-success" data-toggle="modal" data-id="'+listaCargar[i].id+'" data-target="#modalModificar">Modificar</button>'+
+                              '<button type="button" class="btn btn-outline-success btn-modificar" data-toggle="modal" data-id="'+listaCargar[i].id+'" data-target="#modalModificar">Modificar</button>'+
                               '<button type="button" class="btn btn-outline-danger" onclick="eliminar('+listaCargar[i].id+')">Eliminar</button></div></div>';
         }
         resultado+='</div></div>';
@@ -79,10 +83,69 @@
         cargar();
       }
 
+      async function modificar(){
+        var mangaID = $(".modal-body #mangaId").text();
+        console.log("Entramos al modificar, mangaID:");  
+        console.log(mangaID);
+
+        const titulo=document.getElementById("tituloModificar").value;
+        const descripcion=document.getElementById("descripcionModificar").value;
+        const portada=document.getElementById("portadaModificar");
+
+        const data = new FormData();
+        data.append('mangaid',mangaID);
+        data.append('nombre', titulo);
+        data.append('descripcion', descripcion);
+        if(portada.files.length == 0){
+          console.log("No hay portada man");
+        }
+        else{
+          for (const file of portada.files) {
+            data.append('port',file,file.name);
+          }
+        }
+
+        fetch('admin/1/modificarManga', {
+          method: 'POST',
+          body: data
+        });
+        cargar();
+      }
+
+      function filterById(jsonObject, id) {return jsonObject.filter(function(jsonObject) {return (jsonObject['id'] == id);})[0];}
+
+      $(document).on("click", ".btn-modificar", function () {
+        var mangaId = $(this).data('id');
+        mangaModificar = filterById(mangajson,mangaId);
+        $(".modal-modificar #tituloModificar").val( mangaModificar.nombre);
+        $(".modal-modificar #descripcionModificar").val( mangaModificar.descripcion);
+        $(".modal-modificar #portadaPreview").attr('src', mangaModificar.port)
+        .width(150).height(200).val( mangaModificar.port);
+        $(".modal-modificar #portadaSubida").val( mangaModificar.port);
+        
+        $(".modal-modificar #mangaId").empty();
+        $(".modal-modificar #mangaId").append(mangaId);
+      });
+
+      function portadaSeleccionada(event,num) {
+        var selectedFile = event.target.files[0];
+        var reader = new FileReader();
+        if(num == 0){
+          var imgtag = document.getElementById("portadaPreviewSubida");
+          imgtag.title = selectedFile.name;
+        }
+        else{
+          var imgtag = document.getElementById("portadaPreview");
+          imgtag.title = selectedFile.name;
+        }
+        reader.onload = function(event) {
+          imgtag.src = event.target.result;
+        };
+
+        reader.readAsDataURL(selectedFile);
+      }
+
     </script>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   </head>
 
   <body class="text-bg-secondary p-3">
@@ -106,6 +169,7 @@
         </form>
       </div>
     </nav><br>
+
     <section class="element-header-content" id="mangaHeader">
 
     </section>
@@ -113,71 +177,74 @@
     <!-- Modal Subir manga-->
     <div class="modal" id="modalSubida" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
     aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content bg-dark">
-        <div class="modal-header text-center">
-          <h4 class="modal-title w-100 font-weight-bold">Subir Manga</h4>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body mx-3">
-          <div class="form-group">
-            <label for="tituloSubida">Titulo</label>
-            <input type="text" class="form-control" id="tituloSubida" placeholder="Titulo del manga">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content bg-dark">
+          <div class="modal-header text-center">
+            <h4 class="modal-title w-100 font-weight-bold">Subir Manga</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
           </div>
+          <div class="modal-body mx-3">
+            <div class="form-group">
+              <label for="tituloSubida">Titulo</label>
+              <input type="text" class="form-control" id="tituloSubida" placeholder="Titulo del manga">
+            </div>
 
-          <div class="form-group">
-            <label for="descripcionSubida">Sinopsis</label>
-            <textarea class="form-control" id="descripcionSubida" rows="3" placeholder="Sinopsis del manga"></textarea>
-          </div>
+            <div class="form-group">
+              <label for="descripcionSubida">Sinopsis</label>
+              <textarea class="form-control" id="descripcionSubida" rows="3" placeholder="Sinopsis del manga"></textarea>
+            </div>
 
-          <div class="form-group">
-            <label for="portadaSubida">Portada</label>
-            <input type="file" class="form-control" id="portadaSubida">
+            <div class="form-group">
+              <label for="portadaPreviewSubida">Portada</label><br>
+              <img id="portadaPreviewSubida" src="Imagenes/null.jpg" alt="Vista previa..." width="150" height="200"/>
+              <input type="file" class="form-control" id="portadaSubida" onchange="portadaSeleccionada(event,0)">
+            </div>
           </div>
-        </div>
-        <div class="modal-footer d-flex justify-content-center">
-          <button type="button" class="btn btn-outline-success" data-dismiss="modal" onclick="enviar()">Enviar</button>
-          <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+          <div class="modal-footer d-flex justify-content-center">
+            <button type="button" class="btn btn-outline-success" data-dismiss="modal" onclick="enviar()">Enviar</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="modal" id="modalModificar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    <div class="modal" id="modalModificar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
     aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content bg-dark">
-        <div class="modal-header text-center">
-          <h4 class="modal-title w-100 font-weight-bold">Modificar Manga</h4>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body mx-3">
-          <div class="form-group">
-            <label for="tituloSubida">Titulo</label>
-            <input type="text" class="form-control" id="tituloSubida" placeholder="Titulo del manga">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content bg-dark">
+          <div class="modal-header text-center">
+            <h4 class="modal-title w-100 font-weight-bold">Modificar Manga</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
           </div>
+          <div class="modal-body modal-modificar mx-3">
+            <div class="form-group">
+              <label >ID:</label><label id="mangaId"></label><br>
+              <label for="tituloModificar">Titulo</label>
+              <input type="text" class="form-control" id="tituloModificar" placeholder="Titulo del manga">
+            </div>
 
-          <div class="form-group">
-            <label for="descripcionSubida">Sinopsis</label>
-            <textarea class="form-control" id="descripcionSubida" rows="3" placeholder="Sinopsis del manga"></textarea>
-          </div>
+            <div class="form-group">
+              <label for="descripcionSubida">Sinopsis</label>
+              <textarea class="form-control" id="descripcionModificar" rows="3" placeholder="Sinopsis del manga"></textarea>
+            </div>
 
-          <div class="form-group">
-            <label for="portadaSubida">Portada</label>
-            <input type="file" class="form-control" id="portadaSubida">
+            <div class="form-group">
+              <label for="portadaPreview">Portada</label><br>
+              <img id="portadaPreview" src="#" alt="Vista previa..."  width="150" height="200"/>
+              <input type="file" class="form-control" id="portadaModificar" onchange="portadaSeleccionada(event,1)">
+            </div>
           </div>
-        </div>
-        <div class="modal-footer d-flex justify-content-center">
-          <button type="button" class="btn btn-outline-success" data-dismiss="modal" onclick="">Aplicar</button>
-          <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+          <div class="modal-footer d-flex justify-content-center">
+            <button type="button" class="btn btn-outline-success" id="botonAplicar" data-dismiss="modal" onclick="modificar()">Aplicar</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
   </body>
 </html>
