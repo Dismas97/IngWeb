@@ -23,7 +23,7 @@ async function getManga(){
     var capsAñadidos=[];
     for (var i=0; i<mangajson.caps.length; i++){
         if(capsAñadidos.includes(mangajson.caps[i].num) == false){
-            capitulos.innerHTML+='<a href="visualizado.html?capid='+mangajson.caps[i].id+'&mangaid='+mangajson.id+'"><div class="opcion"><p> Capitulo: '+mangajson.caps[i].num +'</p><p class="icono"> + </p></div></a>'
+            capitulos.innerHTML+='<a href="visualizado.html?capid='+mangajson.caps[i].id+'&mangaid='+mangajson.id+'&nombre='+mangajson.nombre+'"><div class="opcion"><p> Capitulo: '+mangajson.caps[i].num +'</p><p class="icono"> + </p></div></a>'
             capsAñadidos.push(mangajson.caps[i].num);
         }
     }

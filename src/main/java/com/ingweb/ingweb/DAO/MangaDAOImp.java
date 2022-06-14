@@ -26,7 +26,6 @@ public class MangaDAOImp implements MangaDAO{
         aux.ordenarCaps();
         return aux;
     }
-
     @Override
     public List<Manga> getMangas(String nombre){
         String query = "From Manga as M WHERE M.nombre LIKE :nombre";
