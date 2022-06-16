@@ -12,26 +12,13 @@
     <script>
         window.addEventListener("load", cargar());
 
-        function zipFiles(dom){
-            let zip = new JSZip();
-            for(let f of dom.files){
-                zip.file(f.webkitRelativePath, f);
-            }
-            zip.generateAsync({type:"blob"})
-            .then(function (blob) {
-                const link = document.createElement('a');
-                link.href = window.URL.createObjectURL(blob);
-                link.download = 'test.zip';
-                link.click();
-            });
-        }
         function descargar(){
             const valores = window.location.search;
             const urlParams = new URLSearchParams(valores);
-            const ruta = 'Imagenes/'+urlParams.get('mangaid')+'/'+urlParams.get('capid')+'/';
-            $.getJSON(ruta,data => {
-            console.log(data);});
+            const ruta = 'http://localhost:8080/manga/'+urlParams.get('mangaid')+'/'+urlParams.get('capid')+'/descargar';
+            window.open(ruta);
         }
+
 
         async function cargar(){
             const valores = window.location.search;
@@ -68,7 +55,7 @@
         <nav class="navbar text-bg-dark p-3">
             <form class="container-fluid justify-content-start">
                 <button class="btn btn-sm btn-dark" type="button" onclick="history.back()">Volver Atras</button>
-                <!--<button class="btn btn-sm btn-dark" type="button" onclick="descargar()">Descargar Capitulo</button>-->
+                <button class="btn btn-sm btn-dark" type="button" onclick="descargar()">Descargar Capitulo</button>
             </form>
         </nav>
     </div>

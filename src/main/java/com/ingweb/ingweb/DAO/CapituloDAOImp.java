@@ -6,12 +6,15 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.nio.file.*;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 
 @Repository
 @Transactional
@@ -20,13 +23,13 @@ public class CapituloDAOImp implements CapituloDAO{
     @PersistenceContext
     EntityManager conexion;
     @Override
-    public Capitulo getCapitulo(long mangaid, long id) {
+    public Capitulo getCapitulo(Long mangaid, Long id) {
         String query = "FROM Capitulo C WHERE C.id = "+id+" AND C.manga.id = "+mangaid;
         return (Capitulo) conexion.createQuery(query).getSingleResult();
     }
 
     @Override
-    public List<Capitulo> getCapitulos(long mangaid) {
+    public List<Capitulo> getCapitulos(Long mangaid) {
         String query = "From Capitulo C WHERE C.manga.id = "+mangaid+" ORDER BY C.num";
         return conexion.createQuery(query).getResultList();
     }

@@ -26,10 +26,14 @@ public class MangaController {
     }
 
     @RequestMapping(value = "manga")
-    public List<Manga> getMangas(){return dao.getMangas();}
+    public List<Manga> getMangas(){
+        return dao.getMangas();
+    }
 
     @RequestMapping(value = "manga/busqueda")
-    public List<Manga> getManga(@RequestParam String nombre){ return dao.getMangas(nombre);}
+    public List<Manga> getManga(@RequestParam String nombre){
+        return dao.getMangas(nombre);
+    }
 
     @PostMapping(value = "manga/{id}/subida")
     public ResponseEntity<String> subirCapitulo(@PathVariable long id, @RequestParam("numCap") int numCap,
@@ -45,8 +49,5 @@ public class MangaController {
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Hubo un error al subir el archivo");
         }
-
     }
-
-
 }
