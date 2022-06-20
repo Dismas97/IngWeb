@@ -7,43 +7,43 @@
 	<title>MLG!</title>
 </head>
 <body>
-<div class="container right-panel-active">
-	<!-- Sign Up -->
-	<div class="container__form container--signup">
-		<form action="#" class="form" id="form1">
-			<h2 class="form__title">Registrarse</h2>
-			<input type="text" placeholder="Usuario" class="input" />
-			<input type="email" placeholder="Email" class="input" />
-			<input type="password" placeholder="Contraseña" class="input" />
-			<button class="btn">Enviar</button>
-		</form>
-	</div>
+	<div class="container right-panel-active">
+		<!-- Sign Up -->
+		<div class="container__form container--signup">
+			<form action="#" class="form" id="form1">
+				<h2 class="form__title">Registrarse</h2>
+				<input type="text" placeholder="Usuario" class="input" id="registroUser"/>
+				<input type="email" placeholder="Email" class="input" id="registroEmail"/>
+				<input type="password" placeholder="Contraseña" class="input" id="registroContra"/>
+				<button class="btn" onclick="registrar()">Enviar</button>
+			</form>
+		</div>
 
-	<!-- Sign In -->
-	<div class="container__form container--signin">
-		<form class="form" id="form2">
-			<h2 class="form__title">Iniciar Sesion</h2>
-			<input type="email" placeholder="Email" class="input" />
-			<input type="password" placeholder="Password" class="input" />
-			<a href="#" class="link">Olvido su contraseña?..</a>
-			<a href="index.html">
-			<input type="button" value="Ingresar" class="btn">
-			</a>
-		</form>
-	</div>
+		<!-- Sign In -->
+		<div class="container__form container--signin">
+			<form class="form" id="form2">
+				<h2 class="form__title">Iniciar Sesion</h2>
+				<input type="email" placeholder="Email" class="input" id="loginEmail"/>
+				<input type="password" placeholder="Contraseña" class="input" id="loginContra"/>
+				<!--<a href="#" class="link">Olvido su contraseña?..</a>
+				<a href="index.html">-->
+				<input type="button" value="Ingresar" onclick="loguear()" class="btn">
+				</a>
+			</form>
+		</div>
 
-	<!-- Overlay -->
-	<div class="container__overlay">
-		<div class="overlay">
-			<div class="overlay__panel overlay--left">
-				<button class="btn" id="signIn">Ingresar</button>
-			</div>
-			<div class="overlay__panel overlay--right">
-				<button class="btn" id="signUp">Registrarse</button>
+		<!-- Overlay -->
+		<div class="container__overlay">
+			<div class="overlay">
+				<div class="overlay__panel overlay--left">
+					<button class="btn" id="signIn">Ingresar</button>
+				</div>
+				<div class="overlay__panel overlay--right">
+					<button class="btn" id="signUp">Registrarse</button>
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
 </body>
 <script>
 	const signInBtn = document.getElementById("signIn");
@@ -62,5 +62,45 @@
 
 	fistForm.addEventListener("submit", (e) => e.preventDefault());
 	secondForm.addEventListener("submit", (e) => e.preventDefault());
+
+	async function registrar(){
+		let data = {};
+		data.alias=document.getElementById("registroUser").value;
+		data.email=document.getElementById("registroEmail").value;
+		data.contra=document.getElementById("registroContra").value;
+		
+        const nuevo = await fetch('registrarse', {
+            method: 'POST',
+            headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+            },
+			body: JSON.stringify(data)
+        });
+		alert("Registro Exitoso!");
+		container.classList.remove("right-panel-active");
+	}
+	async function loguear(){
+		let data = {};
+		data.email=document.getElementById("loginEmail").value;
+		data.contra=document.getElementById("loginContra").value;
+		
+        const nuevo = await fetch('login', {
+            method: 'POST',
+            headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+            },
+			body: JSON.stringify(data)
+        });
+        const respuesta = await nuevo.text();
+		if(respuesta != 'ERROR'){
+			localStorage.token = respuesta;
+			window.location.href= 'index.html';
+		}
+		else{
+			alert("Los datos ingresados no son correctos");
+		}
+	}
 </script>
 </html>

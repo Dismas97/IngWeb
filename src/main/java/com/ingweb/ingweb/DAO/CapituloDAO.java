@@ -1,11 +1,9 @@
 package com.ingweb.ingweb.DAO;
 
 import com.ingweb.ingweb.models.Capitulo;
-import com.ingweb.ingweb.models.Manga;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.io.IOException;
 import java.util.List;
 

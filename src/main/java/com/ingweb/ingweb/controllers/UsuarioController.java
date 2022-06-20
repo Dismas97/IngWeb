@@ -5,25 +5,30 @@ import com.ingweb.ingweb.DAO.MangaDAOImp;
 import com.ingweb.ingweb.DAO.UsuarioDAO;
 import com.ingweb.ingweb.DAO.UsuarioDAOImp;
 import com.ingweb.ingweb.models.Manga;
+import com.ingweb.ingweb.models.Usuario;
+import com.ingweb.ingweb.utils.JWTUtil;
+import de.mkammerer.argon2.Argon2;
+import de.mkammerer.argon2.Argon2Factory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
-import javax.persistence.PostRemove;
 import java.io.IOException;
 import java.util.Optional;
 
 @RestController
 public class UsuarioController {
     @Autowired
-    UsuarioDAO dao = new UsuarioDAOImp();
+    private UsuarioDAO dao = new UsuarioDAOImp();
     @Autowired
-    MangaDAO mangadao = new MangaDAOImp();
+    private MangaDAO mangadao = new MangaDAOImp();
+
+    @Autowired
+    private JWTUtil jwtUtil;
 
     @PostMapping(value = "admin/{id}/modificarManga")
-    ResponseEntity<String> modificarManga(@PathVariable long id, @RequestParam("mangaid") long mangaid, @RequestParam("nombre") String nombre,
+    ResponseEntity<String> modificarManga(@PathVariable Long id, @RequestParam("mangaid") Long mangaid, @RequestParam("nombre") String nombre,
                                       @RequestParam("descripcion") String descripcion, @RequestParam("port") Optional<MultipartFile> port){
         if(dao.getUsuario(id).isAdmin()) {
             if (!port.isPresent()) {
@@ -37,7 +42,7 @@ public class UsuarioController {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("El usuario no es administrador");
     }
     @PostMapping(value = "admin/{id}/subirmanga")
-    ResponseEntity<String> subirManga(@PathVariable long id, @RequestParam("nombre") String nombre,
+    ResponseEntity<String> subirManga(@PathVariable Long id, @RequestParam("nombre") String nombre,
                        @RequestParam("descripcion") String descripcion, @RequestParam("port") MultipartFile port){
         if(dao.getUsuario(id).isAdmin()){
             Manga aux = new Manga();
@@ -54,7 +59,7 @@ public class UsuarioController {
     }
 
     @DeleteMapping(value = "admin/{id}/borrarmanga")
-    ResponseEntity<String> borrarManga(@PathVariable long id, @RequestParam("mangaid") long mangaid){
+    ResponseEntity<String> borrarManga(@PathVariable Long id, @RequestParam("mangaid") Long mangaid){
         if(dao.getUsuario(id).isAdmin()){
             mangadao.bajaManga(mangaid);
             return ResponseEntity.status(HttpStatus.OK).body("Manga Eliminado con exito");
@@ -62,4 +67,22 @@ public class UsuarioController {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("El usuario no es administrador");
     }
 
+    @PostMapping(value = "registrarse")
+    void registrar(@RequestBody Usuario nuevo){
+        Argon2 argon2 = Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2id);
+        String hash = argon2.hash(1,1024,1,nuevo.getContra());
+        nuevo.setContra(hash);
+        dao.altaUsuario(nuevo);
+    }
+
+    @PostMapping(value = "login")
+    String login(@RequestBody Usuario nuevo){
+        Usuario aux = dao.verificar(nuevo);
+        if(aux != null){
+            return jwtUtil.create(String.valueOf(aux.getId()),aux.getAlias());
+        }
+        else{
+            return "ERROR";
+        }
+    }
 }

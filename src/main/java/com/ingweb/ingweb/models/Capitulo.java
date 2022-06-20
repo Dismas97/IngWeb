@@ -3,8 +3,6 @@ package com.ingweb.ingweb.models;
 import lombok.Getter;
 import lombok.Setter;
 import org.jetbrains.annotations.NotNull;
-import org.springframework.stereotype.Service;
-
 import javax.persistence.*;
 import java.util.List;
 

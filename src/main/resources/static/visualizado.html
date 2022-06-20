@@ -1,64 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>MLG!</title>
-    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"><!--  JQUERY  -->
+    <head>
+        <meta charset="UTF-8">
+        <title>MLG!</title>
+        <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"><!--  JQUERY  -->
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
-    </script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
-    <script>
-        window.addEventListener("load", cargar());
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+        </script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+        <script>
+            window.addEventListener("load", cargar());
 
-        function descargar(){
-            const valores = window.location.search;
-            const urlParams = new URLSearchParams(valores);
-            const ruta = 'http://localhost:8080/manga/'+urlParams.get('mangaid')+'/'+urlParams.get('capid')+'/descargar';
-            window.open(ruta);
-        }
+            function descargar(){
+                const valores = window.location.search;
+                const urlParams = new URLSearchParams(valores);
+                const ruta = 'http://localhost:8080/manga/'+urlParams.get('mangaid')+'/'+urlParams.get('capid')+'/descargar';
+                window.open(ruta);
+            }
 
 
-        async function cargar(){
-            const valores = window.location.search;
-            const urlParams = new URLSearchParams(valores);
-            const ruta = 'manga/'+urlParams.get('mangaid')+'/'+urlParams.get('capid');
+            async function cargar(){
+                const valores = window.location.search;
+                const urlParams = new URLSearchParams(valores);
+                const ruta = 'manga/'+urlParams.get('mangaid')+'/'+urlParams.get('capid');
 
-            const cap = await fetch(ruta, {
-                method: 'GET',
-                headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
+                const cap = await fetch(ruta, {
+                    method: 'GET',
+                    headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                    }
+                });
+                globalThis.capjson = await cap.json();
+                imprimirPags(capjson);
+            }
+
+            async function imprimirPags(jsoncap){
+                var customSort = function (a, b) {
+                    return (Number(a.match(/(\d+)/g)[2]) - Number((b.match(/(\d+)/g)[2])));
                 }
-            });
-            globalThis.capjson = await cap.json();
-            imprimirPags(capjson);
-        }
-
-        async function imprimirPags(jsoncap){
-            var customSort = function (a, b) {
-                return (Number(a.match(/(\d+)/g)[2]) - Number((b.match(/(\d+)/g)[2])));
+                jsoncap.pag.sort(customSort);
+                var nuevo = document.getElementById("mangaVer");
+                resultado = "";
+                for (var i=0; i<jsoncap.pag.length; i++){
+                resultado += '<img src="'+jsoncap.pag[i]+'" class="img-fluid"><hr/><hr/>';
+                }
+                nuevo.innerHTML=resultado;
             }
-            jsoncap.pag.sort(customSort);
-            var nuevo = document.getElementById("mangaVer");
-            resultado = "";
-            for (var i=0; i<jsoncap.pag.length; i++){
-              resultado += '<img src="'+jsoncap.pag[i]+'" class="img-fluid"><hr/><hr/>';
-            }
-            nuevo.innerHTML=resultado;
-        }
-    </script>
-</head>
-<body>
-    <div class="sticky-top">
-        <nav class="navbar text-bg-dark p-3">
-            <form class="container-fluid justify-content-start">
-                <button class="btn btn-sm btn-dark" type="button" onclick="history.back()">Volver Atras</button>
-                <button class="btn btn-sm btn-dark" type="button" onclick="descargar()">Descargar Capitulo</button>
-            </form>
-        </nav>
-    </div>
-    <section id="mangaVer"></section>
-</body>
+        </script>
+    </head>
+    <body>
+        <div class="sticky-top">
+            <nav class="navbar text-bg-dark p-3">
+                <form class="container-fluid justify-content-start">
+                    <button class="btn btn-sm btn-dark" type="button" onclick="history.back()">Volver Atras</button>
+                    <button class="btn btn-sm btn-dark" type="button" onclick="descargar()">Descargar Capitulo</button>
+                </form>
+            </nav>
+        </div>
+        <section id="mangaVer"></section>
+    </body>
 </html>
