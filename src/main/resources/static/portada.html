@@ -1,45 +1,68 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
-    <head>
-        <title>MLG!</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="css/newcss.css" rel="stylesheet" type="text/css"/>
-        <link href="css/style.css" rel="stylesheet" type="text/css"/>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MLG!</title>
+    <link href="css/newcss.css" rel="stylesheet" type="text/css"/>
+    <link href="css/style.css" rel="stylesheet" type="text/css"/>
+    <script src = "JS/HeaderMangaInicializar.js"></script>
+    <script src="JS/app.js"></script>
+    <link 
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" 
+    rel="stylesheet" 
+    integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" 
+    crossorigin="anonymous">
+    
+    <script>
 
-        <script src = "JS/HeaderMangaInicializar.js"></script>
-        <script src="JS/app.js"></script>
-        <script src = "JS/jszip.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.js"></script>
-        <title>MLG!</title>
-    </head>
-    <body>
-        <div class="pb-5">
-        <header>
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <div class="container">
-                    <a href="index.html">
-                    MANGA <i>LEST</i><b>GO!</b>
-                    </a>               
-                </div>
-            </nav>
-        </header>
-        <section class="element">
+      
+ 
+      async function buscar(){
+        const buscado=document.getElementById("nombreBuscar").value;
+        const buscadosSolo = mangajson.filter(function (entry) {
+            return (entry.nombre.toLowerCase()).includes(buscado.toLowerCase());
+        });
+        crearTarjetas(buscadosSolo);
+      }
+
+      
+
+    </script>
+  </head>
+
+  <body class="text-bg-secondary p-3">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid" style="width: 1084px;height: 40px; margin: initial;">
+        <div class="collapse navbar-collapse" id="navbarText">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="javascript:window.location.href=window.location.href">MLG!</a>
+            </li>
+           
+          </ul>
+        </div>
+        <form class="d-flex" role="search" style=" margin: 0px -220px;">
+          <input class="form-control me-2" type="search" placeholder="Buscar Manga" id="nombreBuscar" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit" onclick="buscar()">&#8981</button>
+        </form>
+      </div>
+    </nav><br>
+
+    <section class="element">
             <header class="container-fluid element-header manga">
                 <div class="background"></div>
                 <div class="wallpaper"></div>
                 <section class="element-header-content" id="mangaHeader">
-
+                  
                 </section>
-            <div style="margin: 5px 110px;" > <button class="custom-btn btn-3" onclick="descargar()" >Descargar Manga</button></div>
+            <div style="margin: 5px 110px;"> 
+              <button class="custom-btn btn-10" onclick="descargar()" style="margin: 10px 60px;">Descargar</button>
+            </div>
             </header>
 
         </section>
+
         <div class="cont-menu">
             <h2 style="margin: 20px 150px;color: #000000;">Capitulos</h2>
 
@@ -47,96 +70,24 @@ and open the template in the editor.
                 <div class="columna1">
                     <div class="cont-enlace" id="capitulos">
                         <div class="enlace" id="verCap"></div>
-                    </div>
+                 </div>
                 </div>
             
-                <div class="columna2"><button class="custom-btn btn-10" style="margin: 10px 100px"; >Eliminar</button></div>
+                <div class="columna2"><button class="custom-btn btn-10" style="margin: 10px 100px; ">Eliminar</button></div>
             
                 <div class="columna3">
-                    <input type="file" id="paginas" class="choose" multiple="">
+                    <input type="file" id="paginas" class="choose" multiple="" style="margin: 10px 50px;"
+>
                     <div class="quantity">
-                        <b style="margin: 0px 90px;">Capitulo</b>
-                        <input type="number" id="num-cap" min="1" >
+                        <b style="margin: 0px 90px;color: #000!important;">Capitulo</b>
+                        <input type="number" id="num-cap" min="1" style="background: #6c757d;">
                     </div>
 
-                    <button class="custom-btn btn-12" style="margin: 30px 50px;" onclick="enviar()"> <span>Subir Capitulo!</span><span>Enviar</span></button>
+                    <button class="custom-btn btn-10" style="margin: 30px 50px;" onclick="enviar()"> <span>Subir</span></button>
                 </div>
             </div>
         </div>
-        </div>
-    <script>
-    async function enviar(){
 
-        const valores = window.location.search;
-        const urlParams = new URLSearchParams(valores);
-        const ruta = 'manga/'+urlParams.get('id')+'/subida';
-
-
-        const data = new FormData();
-        const input =  document.getElementById('paginas');
-        const numCap =  document.getElementById('num-cap').value;
-
-        data.append('usuario', '123');
-        data.append('numCap', numCap);
-
-        for (const file of input.files) {
-          data.append('paginas',file,file.name);
-        }
-        fetch(ruta, {
-          method: 'POST',
-          body: data
-        })
-        .then((response) => response.json())
-        .then((result) => {
-          console.log('Archivos enviados:', result);
-          location.reload();
-        })
-        .catch((error) => {
-          console.error('Malio Sal:', error);
-          location.reload();
-        });
-        }
-    </script>
-    <script>
-     async function descargar(){
-        var zip = new JSZip();
-        zip.file("Hello.txt", "Hello World\n");
-        
-
-        const valores = window.location.search;
-        const urlParams = new URLSearchParams(valores);
-        const ruta = 'manga/'+urlParams.get('mangaid')+'/'+urlParams.get('capid');
-
-        const cap = await fetch(ruta, {
-                method: 'GET',
-                headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-                }
-            });
-            const capjson = await cap.json();
-
-            var customSort = function (a, b) {
-                return (Number(a.match(/(\d+)/g)[2]) - Number((b.match(/(\d+)/g)[2])));
-            }
-            capjson.pag.sort(customSort);
-            var img = zip.folder("imagenes");
-
-            for (var i=0; i<capjson.pag.length; i++){
-              img.file("capjson.pag[i]",imgData,{base64: true}) ;
-            }
-
-            zip.generateAsync({type:"blob"})
-        .then(function(content) {
-        saveAs(content, "example.zip");
-               });
-        }
-    
-
-
-
-    </script>
-
-    </body>
-
+   
+  </body>
 </html>

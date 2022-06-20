@@ -19,7 +19,7 @@
 .cont-menu .cont-enlace .opcion{
     display: flex;
     justify-content: space-between;
-    background-color: #4660d1;
+    background-color: #000000;
     color: white;
     padding: 13px 15px;
     font-size: 22px;

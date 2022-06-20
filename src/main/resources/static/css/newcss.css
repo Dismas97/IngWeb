@@ -7,65 +7,12 @@ and open the template in the editor.
     Created on : 23-may-2022, 10:22:15
     Author     : germa
 */
-html {
-    font-family: sans-serif;
-    line-height: 1.15;
-    -webkit-text-size-adjust: 100%;
-    -ms-text-size-adjust: 100%;
-    -ms-overflow-style: scrollbar;
-    -webkit-tap-highlight-color: transparent;
-}
-body {
-    margin: 0;
-    font-family: Roboto\, monospace,sans-serif;
-    font-size: .875rem;
-    font-weight: 400;
-    line-height: 1.6;
-    color: #212529;
-    text-align: left;
-    //background-color: #e9eaed;
-    background-color: RGBA(108,117,125,var(--bs-bg-opacity,1))!important;;
-}
+
+
 .bg-light {
     background-color: #f8f9fa;
 }
 
-nav{ display: block;}
-
-.navbar, .navbar.container{
-    display: flex;
-}
-
-.navbar{
-    display: flex;
-    flex-wrap: nowrap;
-    align-items:center;
-}
-.navbar-brand {
-    display: inline-block;
-    padding-top: 0.325rem;
-    padding-bottom: 0.325rem;
-    line-height: inherit;
-    white-space: nowrap;
-}
-
-.container {
-    width: 100%;
-    padding-right: 15px;
-    padding-left: 15px;
-    margin-right: auto;
-    margin-left: 80px;
-    max-width: 900px
-}
-a {
-    color: #2957ba;
-    text-decoration: none;
-    background-color: transparent;
-    -webkit-text-decoration-skip: objects;
-}
-div{
-    display:block;
-}
 
 
 .element .element-header {
@@ -103,6 +50,7 @@ div{
 .element .element-header .element-header-content .element-header-content-text .element-title {
     color: #f0f0f0;
     bottom: 0;
+    text-align: center;
 }
 .element .element-header .element-header-content .element-header-content-text a, .element .element-header .element-header-content .element-header-content-text h1, .element .element-header .element-header-content .element-header-content-text h2, .element .element-header .element-header-content .element-header-content-text h3, .element .element-header .element-header-content .element-header-content-text h4, .element .element-header .element-header-content .element-header-content-text h5, .element .element-header .element-header-content .element-header-content-text h6, .element .element-header .element-header-content .element-header-content-text p, .element .element-header .element-header-content .element-header-content-text span {
     text-shadow: 1px 1px 0 #222!important;
@@ -469,13 +417,12 @@ input[type=number]
   height: 50%;
 }
 form {
-  background: #fff;
-  color: #133783;
-border: 1px solid;
-border-color: #e5e6e9 #dfe0e4 #d0d1d5;
--webkit-border-radius: 5px;
-  margin-top: 10px;
-  padding: 10px;
+  background: #000;
+    color: #000000;
+    border-color: #000000 #000000 #000000;
+    -webkit-border-radius: 1px;
+    margin-top: 0px;
+    padding: 0px;
 }
 
 input {
@@ -498,7 +445,7 @@ input[type=search] {
 	background: #ededed url(http://webdesignerwall.com/demo/expandable-search-form/images/search-icon.png) no-repeat 9px center;
 	border: solid 1px #ccc;
 	padding: 9px 10px 9px 32px;
-	width: 55px;
+	width: 100%;
 
 	-webkit-border-radius: 10em;
 	-moz-border-radius: 10em;
@@ -552,7 +499,7 @@ input::-webkit-input-placeholder {
 .choose::-webkit-file-upload-button {
   color: white;
   display: inline-block;
-  background: #1CB6E0;
+  background: #000000;
   border: none;
   padding: 7px 15px;
   font-weight: 700;
@@ -561,6 +508,8 @@ input::-webkit-input-placeholder {
   cursor: pointer;
   font-size: 10pt;
 }
+
+
 
 
 .custom-btn {
@@ -594,8 +543,7 @@ input::-webkit-input-placeholder {
   perspective: 230px;
 }
 .btn-12 span {
-  background: rgb(0,172,238);
-background: linear-gradient(0deg, rgba(0,172,238,1) 0%, rgba(2,126,251,1) 100%);
+background: linear-gradient(0deg, rgb(31 32 32) 0%, rgb(0 0 0) 100%);
   display: block;
   position: absolute;
   width: 130px;
@@ -653,15 +601,14 @@ background: linear-gradient(0deg, rgba(0,172,238,1) 0%, rgba(2,126,251,1) 100%);
 
 
 .btn-3 {
-  background: rgb(0,172,238);
-background: linear-gradient(0deg, rgba(0,172,238,1) 0%, rgba(2,126,251,1) 100%);
+  /* background: rgb(0,172,238); */
+  background: linear-gradient(0deg, rgb(31 32 32) 0%, rgb(0 0 0) 100%);
   width: 130px;
   height: 40px;
   line-height: 42px;
   padding: 0;
   border: none;
   margin: 10px 20px;
-  
 }
 .btn-3 span {
   position: relative;
@@ -724,7 +671,7 @@ background: linear-gradient(0deg, rgba(0,172,238,1) 0%, rgba(2,126,251,1) 100%);
 }
 .btn-10 {
   background: rgb(22,9,240);
-background: linear-gradient(0deg, rgba(0,172,238,1) 0%, rgba(2,126,251,1) 100%);
+background: linear-gradient(0deg, rgb(31 32 32) 0%, rgb(0 0 0) 100%);
   color: #fff;
   border: none;
   transition: all 0.3s ease;
@@ -749,7 +696,7 @@ background: linear-gradient(0deg, rgba(0,172,238,1) 0%, rgba(2,126,251,1) 100%);
 }
 .btn-10:hover:after {
   background: rgb(0,3,255);
-background: linear-gradient(0deg, rgba(2,126,251,1) 0%,  rgba(0,3,255,1)100%);
+background: linear-gradient(0deg, rgb(31 32 32) 0%, rgb(0 0 0) 100%);
   -webkit-transform: scale(1);
   transform: scale(1);
 }
