@@ -93,9 +93,10 @@
             },
 			body: JSON.stringify(data)
         });
-        const respuesta = await nuevo.text();
-		if(respuesta != 'ERROR'){
-			localStorage.token = respuesta;
+        const respuesta = await nuevo.json();
+		if(respuesta.token != 'ERROR'){
+			localStorage.token = respuesta.token;
+			localStorage.esAdmin = respuesta.admin;
 			window.location.href= 'index.html';
 		}
 		else{

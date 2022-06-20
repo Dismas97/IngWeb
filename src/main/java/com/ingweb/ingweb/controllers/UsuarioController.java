@@ -15,6 +15,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -76,13 +78,18 @@ public class UsuarioController {
     }
 
     @PostMapping(value = "login")
-    String login(@RequestBody Usuario nuevo){
+    Map<String, String> login(@RequestBody Usuario nuevo){
         Usuario aux = dao.verificar(nuevo);
+        HashMap<String, String> map = new HashMap<>();
         if(aux != null){
-            return jwtUtil.create(String.valueOf(aux.getId()),aux.getAlias());
+            map.put("token",jwtUtil.create(String.valueOf(aux.getId()),aux.getAlias()));
+            map.put("admin", String.valueOf(aux.isAdmin()));
+            return map;
         }
         else{
-            return "ERROR";
+            map.put("token", "ERROR");
+            map.put("admin", String.valueOf(false));
+            return map;
         }
     }
 }

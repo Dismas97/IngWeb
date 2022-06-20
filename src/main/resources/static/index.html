@@ -34,9 +34,9 @@
             resultado += '<div class="col">'+
                             '<div class="card h-100 text-center text-bg-dark mb-3 img-fluid"><a href="portada.html?id='+listaCargar[i].id+'">'+
                               '<img src="'+listaCargar[i].port+'" class="card-img-top">'+
-                              '<div class="card-body"><h5 class="card-title">'+listaCargar[i].nombre+'</h5></div></a>'+
+                              '<div class="card-body"><h5 class="card-title">'+listaCargar[i].nombre+'</h5></div></a>'+(localStorage.esAdmin == "true"?
                               '<button type="button" class="btn btn-outline-success btn-modificar" data-toggle="modal" data-id="'+listaCargar[i].id+'" data-target="#modalModificar">Modificar</button>'+
-                              '<button type="button" class="btn btn-outline-danger" onclick="eliminar('+listaCargar[i].id+')">Eliminar</button></div></div>';
+                              '<button type="button" class="btn btn-outline-danger" onclick="eliminar('+listaCargar[i].id+')">Eliminar</button>':'')+'</div></div>';
         }
         resultado+='</div></div>';
         var nuevo = document.getElementById("mangaHeader");
@@ -156,11 +156,9 @@
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="javascript:window.location.href=window.location.href">MLG!</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" data-toggle="modal" data-target="#modalSubida">
-                SUBIR MANGA
-              </a>
-            </li>
+            <script>
+              document.write(localStorage.esAdmin=="true"?'<li class="nav-item"><a class="nav-link" data-toggle="modal" data-target="#modalSubida"> SUBIR MANGA</a></li>':'');
+            </script>
           </ul>
         </div>
         <form class="d-flex" role="search">
