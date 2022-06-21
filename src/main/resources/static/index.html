@@ -1,5 +1,5 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="es">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -34,7 +34,7 @@
             resultado += '<div class="col">'+
                             '<div class="card h-100 text-center text-bg-dark mb-3 img-fluid"><a href="portada.html?id='+listaCargar[i].id+'">'+
                               '<img src="'+listaCargar[i].port+'" class="card-img-top">'+
-                              '<div class="card-body"><h5 class="card-title">'+listaCargar[i].nombre+'</h5></div></a>'+(localStorage.esAdmin == "true"?
+                              '<div class="card-body"><h5 class="card-title">'+listaCargar[i].nombre+'</h5></div></a>'+(localStorage.userID != null && localStorage.esAdmin == "true" ?
                               '<button type="button" class="btn btn-outline-success btn-modificar" data-toggle="modal" data-id="'+listaCargar[i].id+'" data-target="#modalModificar">Modificar</button>'+
                               '<button type="button" class="btn btn-outline-danger" onclick="eliminar('+listaCargar[i].id+')">Eliminar</button>':'')+'</div></div>';
         }
@@ -56,7 +56,6 @@
         const titulo=document.getElementById("tituloSubida").value;
         const descripcion=document.getElementById("descripcionSubida").value;
         const portada=document.getElementById("portadaSubida");
-        const userID=1;
 
         const data = new FormData();
 
@@ -65,7 +64,7 @@
         for (const file of portada.files) {
           data.append('port',file,file.name);
         }
-        fetch('admin/'+userID+'/subirmanga', {
+        fetch('admin/'+localStorage.userID+'/subirmanga', {
           method: 'POST',
           body: data
         });
@@ -73,7 +72,7 @@
       }
 
       async function eliminar(mangaid){
-        const manga = await fetch('admin/'+1+'/borrarmanga?mangaid='+mangaid, {
+        const manga = await fetch('admin/'+localStorage.userID+'/borrarmanga?mangaid='+mangaid, {
             method: 'DELETE',
             headers: {
             'Accept': 'application/json',
@@ -105,7 +104,7 @@
           }
         }
 
-        fetch('admin/1/modificarManga', {
+        fetch('admin/'+localStorage.userID+'/modificarManga', {
           method: 'POST',
           body: data
         });
@@ -144,7 +143,13 @@
 
         reader.readAsDataURL(selectedFile);
       }
-
+      
+      async function cerrarSesion(){
+        localStorage.token = null;
+        localStorage.esAdmin = 'false';
+        localStorage.userID = '-1';
+        window.location.href= 'index.html';
+      }
     </script>
   </head>
 
@@ -157,7 +162,8 @@
               <a class="nav-link active" aria-current="page" href="javascript:window.location.href=window.location.href">MLG!</a>
             </li>
             <script>
-              document.write(localStorage.esAdmin=="true"?'<li class="nav-item"><a class="nav-link" data-toggle="modal" data-target="#modalSubida"> SUBIR MANGA</a></li>':'');
+              document.write(localStorage.userID != null && localStorage.esAdmin=="true"?'<li class="nav-item"><a class="nav-link" data-toggle="modal" data-target="#modalSubida"> SUBIR MANGA</a></li>':'');
+              document.write(localStorage.userID != '-1' ? '<li class="nav-item"><a class="nav-link" onclick="cerrarSesion()" > Cerrar Sesion</a></li>' : '<li class="nav-item"><a class="nav-link" href="login.html">Iniciar Sesion</a></li>')
             </script>
           </ul>
         </div>
@@ -243,6 +249,5 @@
         </div>
       </div>
     </div>
-
   </body>
 </html>

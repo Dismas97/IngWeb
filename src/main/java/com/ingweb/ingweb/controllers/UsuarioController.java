@@ -84,11 +84,13 @@ public class UsuarioController {
         if(aux != null){
             map.put("token",jwtUtil.create(String.valueOf(aux.getId()),aux.getAlias()));
             map.put("admin", String.valueOf(aux.isAdmin()));
+            map.put("id", String.valueOf(aux.getId()));
             return map;
         }
         else{
             map.put("token", "ERROR");
             map.put("admin", String.valueOf(false));
+            map.put("id", "-1");
             return map;
         }
     }

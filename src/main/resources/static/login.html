@@ -28,7 +28,7 @@
 				<!--<a href="#" class="link">Olvido su contraseña?..</a>
 				<a href="index.html">-->
 				<input type="button" value="Ingresar" onclick="loguear()" class="btn">
-				</a>
+				<a class="link" onclick="loguearSinCuenta()">Seguir sin cuenta</a>
 			</form>
 		</div>
 
@@ -45,63 +45,76 @@
 		</div>
 	</div>
 </body>
-<script>
-	const signInBtn = document.getElementById("signIn");
-	const signUpBtn = document.getElementById("signUp");
-	const fistForm = document.getElementById("form1");
-	const secondForm = document.getElementById("form2");
-	const container = document.querySelector(".container");
 
-	signInBtn.addEventListener("click", () => {
-		container.classList.remove("right-panel-active");
-	});
+	<script>
+		const signInBtn = document.getElementById("signIn");
+		const signUpBtn = document.getElementById("signUp");
+		const fistForm = document.getElementById("form1");
+		const secondForm = document.getElementById("form2");
+		const container = document.querySelector(".container");
 
-	signUpBtn.addEventListener("click", () => {
-		container.classList.add("right-panel-active");
-	});
+		signInBtn.addEventListener("click", () => {
+			container.classList.remove("right-panel-active");
+		});
 
-	fistForm.addEventListener("submit", (e) => e.preventDefault());
-	secondForm.addEventListener("submit", (e) => e.preventDefault());
+		signUpBtn.addEventListener("click", () => {
+			container.classList.add("right-panel-active");
+		});
 
-	async function registrar(){
-		let data = {};
-		data.alias=document.getElementById("registroUser").value;
-		data.email=document.getElementById("registroEmail").value;
-		data.contra=document.getElementById("registroContra").value;
+		fistForm.addEventListener("submit", (e) => e.preventDefault());
+		secondForm.addEventListener("submit", (e) => e.preventDefault());
+
+		async function registrar(){
+			let data = {};
+			data.alias=document.getElementById("registroUser").value;
+			data.email=document.getElementById("registroEmail").value;
+			data.contra=document.getElementById("registroContra").value;
+			
+			const nuevo = await fetch('registrarse', {
+				method: 'POST',
+				headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json'
+				},
+				body: JSON.stringify(data)
+			});
+			alert("Registro Exitoso!");
+			container.classList.remove("right-panel-active");
+		}
 		
-        const nuevo = await fetch('registrarse', {
-            method: 'POST',
-            headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-            },
-			body: JSON.stringify(data)
-        });
-		alert("Registro Exitoso!");
-		container.classList.remove("right-panel-active");
-	}
-	async function loguear(){
-		let data = {};
-		data.email=document.getElementById("loginEmail").value;
-		data.contra=document.getElementById("loginContra").value;
-		
-        const nuevo = await fetch('login', {
-            method: 'POST',
-            headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-            },
-			body: JSON.stringify(data)
-        });
-        const respuesta = await nuevo.json();
-		if(respuesta.token != 'ERROR'){
-			localStorage.token = respuesta.token;
-			localStorage.esAdmin = respuesta.admin;
+		async function loguear(){
+			let data = {};
+			data.email=document.getElementById("loginEmail").value;
+			data.contra=document.getElementById("loginContra").value;
+			
+			const nuevo = await fetch('login', {
+				method: 'POST',
+				headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json'
+				},
+				body: JSON.stringify(data)
+			});
+			const respuesta = await nuevo.json();
+			if(respuesta.token != 'ERROR'){
+				localStorage.token = respuesta.token;
+				localStorage.esAdmin = respuesta.admin;
+				localStorage.userID = respuesta.id;
+				window.location.href= 'index.html';
+			}
+			else{
+				alert("Los datos ingresados no son correctos");
+				localStorage.esAdmin = null;
+				localStorage.userID = null;
+			}
+		}
+
+		async function loguearSinCuenta(){
+			localStorage.token = null;
+			localStorage.esAdmin = 'false';
+			localStorage.userID = '-1';
 			window.location.href= 'index.html';
 		}
-		else{
-			alert("Los datos ingresados no son correctos");
-		}
-	}
-</script>
+
+	</script>
 </html>
